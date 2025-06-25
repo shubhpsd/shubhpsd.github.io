@@ -1,37 +1,47 @@
 ---
-title: "Building a Modern Portfolio Website with Hugo and GitHub Pages"
-date: 2025-05-22
+title: "Building a Modern Portfolio Website with Hugo and Gruvbox Theme"
+date: 2025-01-28
 draft: false
 description:
-  "Creating a clean, professional portfolio website using Hugo static site
-  generator, custom CSS, and automated deployment"
+  "Creating a professional portfolio website using Hugo static site generator,
+  Gruvbox theme, JSON Resume integration, and optimized CSS architecture"
 tags:
   [
     "hugo",
     "web-development",
     "github-pages",
     "portfolio",
+    "gruvbox",
+    "json-resume",
+    "css-optimization",
     "static-site",
-    "css",
-    "automation",
   ]
 toc: true
 ---
 
-Every developer needs a professional online presence. This website represents my
-journey in creating a clean, fast, and maintainable portfolio using modern web
-development practices and static site generation.
+Building a professional developer portfolio requires balancing aesthetics,
+performance, and maintainability. This website represents my approach to
+creating a modern, fast, and content-focused portfolio using Hugo's static site
+generation power combined with the distinctive Gruvbox theme.
 
 ## Design Philosophy {#design-philosophy}
 
-When designing this portfolio, I followed several key principles:
+The foundation of this portfolio rests on several key principles:
 
-**Simplicity First**: Clean, minimalist design focusing on content over flashy
-effects **Performance**: Fast loading times with optimized assets and static
-generation **Accessibility**: Proper semantic HTML and responsive design
-**Professionalism**: Removed unnecessary emojis and distractions for a
-business-ready appearance **Blog-Centric**: Emphasis on sharing knowledge and
-project insights
+**Retro-Modern Aesthetic**: Utilizing the Gruvbox color scheme for a
+distinctive, high-contrast design that's both nostalgic and professional
+
+**Performance-First**: Critical CSS inlining and optimized asset delivery for
+sub-second load times
+
+**Content-Centric**: Clean typography and layout that prioritizes readability
+and knowledge sharing
+
+**Structured Data**: JSON Resume integration for maintainable and standardized
+professional information
+
+**Developer Experience**: Modern tooling with PostCSS, automated deployment, and
+comprehensive linting
 
 ## Technology Stack
 
@@ -39,35 +49,36 @@ project insights
 
 **Why Hugo?**
 
-- **Speed**: Builds sites in milliseconds, not seconds
-- **Flexibility**: Powerful templating and content management
-- **SEO-friendly**: Clean URLs and meta tag support
-- **GitHub Pages integration**: Seamless deployment workflow
+- **Speed**: Lightning-fast builds measured in milliseconds
+- **Flexibility**: Powerful templating system with Go templates
+- **Ecosystem**: Rich theme and module ecosystem
+- **SEO-Friendly**: Built-in support for sitemaps, robots.txt, and structured
+  data
 
-### PaperMod Theme
+### Gruvbox Theme
 
-Started with PaperMod theme for its clean aesthetic and extensive customization
-options:
+Chose the Gruvbox theme for its distinctive retro aesthetic and technical
+excellence:
 
 ```toml
 [params]
-  env = "production"
-  title = "Shubham Prasad"
-  description = "Finance and Machine Learning Enthusiast"
-  keywords = ["finance", "machine learning", "portfolio"]
+  # Aqua color scheme for a professional yet distinctive look
+  themeColor = "aqua"
   author = "Shubham Prasad"
+  subtitle = "Finance and Machine Learning Enthusiast"
+  description = "Portfolio showcasing finance, machine learning, and technology projects"
 
-  defaultTheme = "auto"
-  disableThemeToggle = false
-
-  ShowReadingTime = true
-  ShowShareButtons = true
-  ShowPostNavLinks = true
-  ShowBreadCrumbs = true
-  ShowCodeCopyButtons = true
-  ShowWordCount = true
-  ShowRssButtonInSectionTermList = true
+  [params.logo]
+    text = "shubhpsd.github.io"
+    url = "/"
 ```
+
+**Theme Features:**
+
+- High-contrast color palettes optimized for accessibility
+- Built-in dark/light mode support with system preference detection
+- Prism.js integration for syntax highlighting
+- Responsive design with mobile-first approach
 
 ## Site Architecture
 
@@ -75,161 +86,361 @@ options:
 
 ```
 content/
-├── _index.md           # Homepage with blog focus
-├── about/
-│   └── _index.md       # Personal introduction and featured projects
-├── cv/
-│   └── _index.md       # Professional resume/CV
+├── _index.md           # Homepage with personal introduction
+├── about.md            # Detailed bio and featured projects
+├── cv.md              # JSON Resume integration
 └── blog/
-    ├── _index.md       # Blog listing page
-    ├── yoga-pose-detector.md
-    ├── sign-language-detection.md
-    ├── home-server-infrastructure.md
+    ├── _index.md       # Blog listing
+    ├── yoga-pose-detector/
+    ├── githubfetch/
+    ├── movie-recommendation-system/
     └── portfolio-website.md
 ```
 
 ### Navigation Design
 
-Implemented a clean three-section navigation inspired by modern developer
-portfolios:
+Implemented a clean three-section navigation focusing on core content areas:
 
 ```toml
-[[menu.main]]
-name = "About"
-url = "/about/"
-weight = 10
-
-[[menu.main]]
-name = "CV"
-url = "/cv/"
-weight = 20
-
-[[menu.main]]
-name = "Blog"
-url = "/blog/"
-weight = 30
+[menu]
+  [[menu.main]]
+    identifier = "blog"
+    name = "Blog"
+    url = "/blog"
+    weight = 10
+  [[menu.main]]
+    identifier = "cv"
+    name = "CV"
+    url = "/cv"
+    weight = 20
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    url = "/about"
+    weight = 30
 ```
 
-## Custom Styling
+## CSS Architecture & Performance
 
-### Professional CSS Enhancements
+### Critical/Non-Critical CSS Split
 
-Created `/static/css/custom.css` for site-specific improvements:
+Implemented an advanced CSS architecture separating critical and non-critical
+styles:
+
+```
+assets/css/
+├── critical/           # Above-the-fold styles
+│   ├── 00-vendor.css  # Normalize.css and reset
+│   ├── 15-colors.css  # Gruvbox color variables
+│   ├── 20-base.css    # Typography and base styles
+│   ├── 25-layout.css  # Grid and layout
+│   └── 30-header.css  # Navigation and header
+└── non-critical/      # Below-the-fold styles
+    ├── 15-footer.css  # Footer styles
+    └── 20-pagination.css # Pagination components
+```
+
+### Typography System
+
+Custom typography stack combining modern web fonts:
 
 ```css
-/* Professional typography */
-.post-content h1,
-.post-content h2,
-.post-content h3 {
-  color: var(--primary);
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+:root {
+  --font-monospace: "Fira Code", "Lucida Console", Monaco, monospace;
+  --font-sans-serif: Verdana, Helvetica, sans-serif;
+  --font-serif: "Roboto Slab", Georgia, serif;
 }
 
-/* Blog post styling */
-.blog-post-meta {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border);
-}
-
-/* Code syntax highlighting */
-.chroma .hl {
-  background-color: var(--code-bg);
-}
-
-pre code {
-  background: transparent;
-}
-
-/* Responsive design improvements */
-@media (max-width: 768px) {
-  .cv-section {
-    padding: 1rem 0;
-  }
-
-  .cv-item {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+html {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  scroll-behavior: smooth;
 }
 ```
 
-### CV/Resume Styling
+### Gruvbox Color Variables
 
-Implemented professional resume formatting with custom CSS classes:
+The theme's distinctive color palette provides excellent contrast and
+readability:
 
 ```css
-.cv-section {
-  margin-bottom: 2.5rem;
-  padding: 1.5rem 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.cv-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 1.5rem;
-}
-
-.cv-title-date {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 0.5rem;
-}
-
-.cv-company-location {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-style: italic;
-  color: var(--secondary);
-  margin-bottom: 1rem;
+:root {
+  --bg: #fbf1c7; /* Light background */
+  --fg: #3c3836; /* Dark foreground */
+  --bg1: #ebdbb2; /* Subtle background */
+  --fg0: #282828; /* Strong foreground */
+  --aqua1: #689d6a; /* Primary accent */
+  --yellow1: #d79921; /* Warning/highlight */
 }
 ```
+
+## JSON Resume Integration
+
+### Structured Professional Data
+
+Implemented JSON Resume standard for maintainable CV content:
+
+```json
+{
+  "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
+  "basics": {
+    "name": "Shubham Prasad",
+    "label": "Finance and Tech Enthusiast",
+    "email": "shubhampsd@tuta.io",
+    "summary": "Currently pursuing Post Graduate Diploma in Statistical Methods and Analytics...",
+    "location": {
+      "city": "Delhi",
+      "country": "India"
+    }
+  },
+  "work": [...],
+  "education": [...],
+  "skills": [...],
+  "projects": [...]
+}
+```
+
+### Shortcode Integration
+
+Created reusable shortcodes for dynamic content rendering:
+
+```html
+<!-- layouts/shortcodes/json-resume.html -->
+{{ $section := .Get 0 }} {{ $lang := .Page.Language.Lang }} {{ $data := index
+.Site.Data.json_resume $lang }} {{ partial (printf "json-resume/%s.html"
+$section) $data }}
+```
+
+**Usage in Markdown:**
+
+```markdown
+## Experience
+
+{{< json-resume "work" >}}
+
+## Education
+
+{{< json-resume "education" >}}
+```
+
+## Build Process & Tooling
+
+### PostCSS Pipeline
+
+Modern CSS processing with performance optimizations:
+
+```js
+// postcss.config.js
+module.exports = {
+  plugins: [
+    require("postcss-import"),
+    require("postcss-custom-media"),
+    require("postcss-nesting"),
+    require("postcss-preset-env"),
+    require("cssnano")({
+      preset: "default",
+    }),
+    require("@fullhuman/postcss-purgecss")({
+      content: ["./layouts/**/*.html", "./hugo_stats.json"],
+      defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
+    }),
+  ],
+};
+```
+
+### Dependencies & Asset Management
+
+```json
+{
+  "dependencies": {
+    "@tabler/icons": "^3.31.0",
+    "flexsearch": "0.7.43",
+    "normalize.css": "^8.0.1",
+    "prism-themes": "^1.9.0",
+    "prismjs": "^1.29.0",
+    "simple-icons": "^13.7.0",
+    "typeface-fira-code": "^1.1.13",
+    "typeface-roboto-slab": "^1.1.13"
+  }
+}
+```
+
+### Linting & Code Quality
+
+Comprehensive linting setup for maintainable code:
+
+```json
+{
+  "scripts": {
+    "lint": "npm run lint:css && npm run lint:js && npm run lint:md",
+    "lint:css": "stylelint --fix **/*.css",
+    "lint:js": "eslint --fix .",
+    "lint:md": "markdownlint --fix **/*.md"
+  }
+}
+```
+
+## Deployment Pipeline
+
+### GitHub Actions Workflow
+
+Automated deployment with optimized build process:
+
+```yaml
+name: Deploy Hugo site to Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      HUGO_VERSION: 0.147.8
+    steps:
+      - name: Install Hugo CLI
+        run: |
+          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
+          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
+
+      - name: Install Dart Sass
+        run: sudo snap install dart-sass
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Install Node.js dependencies
+        run: "[[ -f package-lock.json ]] && npm ci || true"
+
+      - name: Build with Hugo
+        env:
+          HUGO_ENVIRONMENT: production
+        run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+```
+
+### Build Optimizations
+
+- **Hugo Extended**: WebP image processing and advanced features
+- **Dart Sass**: Latest Sass compilation
+- **Asset Minification**: Automatic CSS/JS/HTML minification
+- **PurgeCSS**: Remove unused CSS for optimal bundle size
+
+## Performance Optimizations
+
+### Critical CSS Inlining
+
+The theme automatically inlines critical CSS for above-the-fold content:
+
+```html
+<!-- layouts/partials/head/stylesheets.html -->
+{{ if .Site.IsServer }}
+<!-- Development: separate files for debugging -->
+<link rel="stylesheet" href="/css/critical.css" />
+{{ else }}
+<!-- Production: inline critical CSS -->
+<style>
+  {{ readFile "public/css/critical.css" | safeCSS }}
+</style>
+{{ end }}
+```
+
+### Image Processing
+
+Hugo's built-in image processing for responsive images:
+
+```html
+{{ $image := .Page.Resources.GetMatch "featured-image.*" }} {{ if $image }} {{
+$webp := $image.Resize "800x webp q80" }} {{ $fallback := $image.Resize "800x
+q80" }}
+<picture>
+  <source srcset="{{ $webp.RelPermalink }}" type="image/webp" />
+  <img src="{{ $fallback.RelPermalink }}" alt="{{ .Title }}" loading="lazy" />
+</picture>
+{{ end }}
+```
+
+### Lighthouse Performance Scores
+
+Current performance metrics:
+
+- **Performance**: 98/100
+- **Accessibility**: 100/100
+- **Best Practices**: 95/100
+- **SEO**: 100/100
 
 ## Content Strategy
 
-### Homepage Design
+### Blog-First Approach
 
-Transformed the traditional portfolio approach into a blog-centric homepage:
+Transformed from a traditional portfolio to a knowledge-sharing platform:
 
 ```markdown
-# Hello, I'm Shubham 👋
+---
+title: Hello, I'm Shubham 👋
+---
 
-Welcome to my corner of the internet where I share insights about **finance**,
-**machine learning**, and **technology**.
+This is the place where I share my thoughts and notes about things that I'm
+excited about and working on and hope to connect with people having a similar
+mindset. I'd love to hear from you!
 
-Currently pursuing Post Graduate Diploma in Finance and Machine Learning at
-Indian Statistical Institute.
-
-## Latest Posts
-
-- [Building a Real-time Yoga Pose Detector with PyTorch and MediaPipe](yoga-pose-detector/)
-- [Building a Sign Language Detection System with Computer Vision](sign-language-detection/)
-- [Building a Self-Hosted Home Server Infrastructure](home-server-infrastructure/)
-
-## What I Do
-
-I'm passionate about applying AI solutions to real-world problems and exploring
-the intersection of finance and technology.
+Check out my latest blog posts below.
 ```
 
-### Blog Integration
+### Technical Writing
 
-Implemented proper blog functionality with:
+Each blog post includes:
 
-- **Tag system**: Categorize posts by technology and topic
-- **Reading time**: Estimated reading duration for each post
-- **Code highlighting**: Syntax highlighting for technical content
-- **Social sharing**: Built-in sharing buttons
-- **SEO optimization**: Meta descriptions and structured data
+- **Comprehensive project documentation** with architecture details
+- **Code examples** with syntax highlighting
+- **Performance metrics** and optimization techniques
+- **Lessons learned** and technical challenges
+
+## Advanced Features
+
+### Search Functionality
+
+Integrated FlexSearch for fast client-side search:
+
+```html
+<!-- layouts/home.searchindex.json -->
+{{- $index := slice -}} {{- range .Site.RegularPages -}} {{- $index = $index |
+append (dict "id" .Permalink "title" .Title "content" (.Plain | truncate 200)
+"tags" .Params.tags ) -}} {{- end -}} {{- $index | jsonify -}}
+```
+
+### Social Sharing
+
+Built-in social sharing with configurable platforms:
+
+```toml
+[[params.socialShare]]
+  iconSuite = "simple-icon"
+  iconName = "linkedin"
+  formatString = "https://www.linkedin.com/sharing/share-offsite/?url={url}"
+```
+
+### Code Highlighting
+
+Advanced Prism.js configuration with multiple plugins:
+
+```toml
+[params.prism]
+  languages = [
+    "markup", "css", "javascript", "python",
+    "bash", "diff", "toml", "json"
+  ]
+  plugins = [
+    "normalize-whitespace",
+    "toolbar",
+    "copy-to-clipboard",
+    "line-numbers",
+    "command-line"
+  ]
+```
 
 ## Development Workflow
 
@@ -240,230 +451,124 @@ Implemented proper blog functionality with:
 git clone https://github.com/shubhpsd/shubhpsd.github.io.git
 cd shubhpsd.github.io
 
-# Install Hugo (macOS)
-brew install hugo
+# Install dependencies
+npm install
 
 # Start development server
-hugo server -D
+hugo server -D --disableFastRender
 
 # Build for production
-hugo --minify
+npm run lint && hugo --minify
 ```
 
-### GitHub Actions Deployment
+### Content Creation Workflow
 
-Automated deployment pipeline using GitHub Actions:
+1. **Create content**: Write Markdown files with frontmatter
+2. **Update JSON Resume**: Modify structured data for CV sections
+3. **Lint and format**: Run automated code quality checks
+4. **Preview locally**: Test with development server
+5. **Deploy**: Push to main branch for automatic deployment
 
-```yaml
-name: Deploy Hugo site to Pages
+## Maintenance & Updates
 
-on:
-  push:
-    branches: ["main"]
-  workflow_dispatch:
+### Dependency Management
 
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: "latest"
-          extended: true
-
-      - name: Build
-        run: hugo --minify
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          path: ./public
-
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v2
-```
-
-## Performance Optimizations
-
-### Static Generation Benefits
-
-- **Sub-second load times**: Pre-generated HTML serves instantly
-- **CDN optimization**: GitHub Pages global distribution
-- **Minimal JavaScript**: Enhanced performance on all devices
-- **SEO advantages**: Search engines can easily crawl static content
-
-### Image Optimization
-
-```yaml
-# Hugo image processing
-{{ $image := .Page.Resources.GetMatch "featured-image.jpg" }}
-{{ $resized := $image.Resize "800x q80" }}
-<img src="{{ $resized.RelPermalink }}" alt="Featured image" loading="lazy">
-```
-
-### Lighthouse Scores
-
-- **Performance**: 95/100
-- **Accessibility**: 100/100
-- **Best Practices**: 92/100
-- **SEO**: 100/100
-
-## Content Management
-
-### Markdown Workflow
-
-All content written in Markdown with frontmatter for metadata:
-
-```yaml
----
-title: "Building a Modern Portfolio Website"
-date: 2025-05-22
-draft: false
-description: "Creating a professional portfolio with Hugo"
-tags: ["hugo", "web-development", "portfolio"]
----
-```
-
-### Asset Organization
-
-```
-static/
-├── css/
-│   └── custom.css
-├── images/
-│   ├── avatar.jpg
-│   └── projects/
-└── docs/
-    └── resume.pdf
-```
-
-## SEO and Analytics
-
-### Meta Tags Implementation
-
-```html
-<meta name="description" content="{{ .Description }}">
-<meta name="keywords" content="{{ delimit .Keywords ", " }}">
-<meta property="og:title" content="{{ .Title }}">
-<meta property="og:description" content="{{ .Description }}">
-<meta property="og:type" content="website">
-```
-
-### Structured Data
+Using Renovate for automated dependency updates:
 
 ```json
 {
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Shubham Prasad",
-  "jobTitle": "Finance and ML Student",
-  "url": "https://shubhpsd.github.io",
-  "sameAs": ["https://linkedin.com/in/shubhpsd", "https://github.com/shubhpsd"]
+  "extends": ["config:base"],
+  "packageRules": [
+    {
+      "matchDepTypes": ["devDependencies"],
+      "automerge": true
+    }
+  ]
 }
 ```
 
-## Challenges and Solutions
-
-### 1. Theme Customization
-
-**Challenge**: PaperMod theme needed extensive customization **Solution**:
-Override theme templates and add custom CSS
-
-### 2. Blog Integration
-
-**Challenge**: Converting from project-focused to blog-centric design
-**Solution**: Restructured navigation and created comprehensive blog posts
-
-### 3. Professional Appearance
-
-**Challenge**: Removing casual elements while maintaining personality
-**Solution**: Selective emoji use and professional color scheme
-
-### 4. Mobile Responsiveness
-
-**Challenge**: Ensuring perfect mobile experience **Solution**: Custom CSS media
-queries and testing across devices
-
-## Maintenance and Updates
-
 ### Content Updates
 
-- **Regular blogging**: Share new projects and insights
-- **CV updates**: Keep professional information current
-- **Project additions**: Document new work and learnings
+Regular maintenance tasks:
 
-### Technical Maintenance
+- **JSON Resume updates**: Keep professional information current
+- **Blog content**: Document new projects and learnings
+- **Performance monitoring**: Track Core Web Vitals
+- **Security updates**: Automated dependency updates
 
-```bash
-# Update Hugo version
-brew upgrade hugo
+## Results & Impact
 
-# Update theme
-git submodule update --remote --merge
+**Professional Presence**: Clean, distinctive website showcasing technical
+capabilities
 
-# Deploy updates
-git add .
-git commit -m "Update content"
-git push origin main
-```
+**Knowledge Platform**: Centralized location for documenting projects and
+insights
 
-## Results and Impact
+**Performance Excellence**: Sub-second load times with 98/100 Lighthouse score
 
-**Professional Presence**: Clean, modern website representing technical
-capabilities **Knowledge Sharing**: Platform for documenting projects and
-insights **Career Benefits**: Professional URL for resumes and applications
-**Learning Platform**: Hands-on experience with modern web technologies
+**Developer Experience**: Modern tooling and automated workflows
+
+**SEO Optimization**: Perfect SEO score with structured data
 
 ## Technical Skills Developed
 
-**Static Site Generation**: Hugo templating and build processes **CSS/HTML**:
-Custom styling and responsive design **Git Workflow**: Version control and
-automated deployment **Performance Optimization**: Web vitals and loading speed
-**SEO**: Search engine optimization and structured data
+**Hugo Mastery**: Advanced templating, shortcodes, and build optimization
+
+**CSS Architecture**: Critical CSS patterns and performance optimization
+
+**JSON Schema**: Structured data implementation with JSON Resume
+
+**Build Automation**: GitHub Actions, PostCSS, and asset optimization
+
+**Performance Optimization**: Web Vitals, image processing, and bundle
+optimization
+
+## Challenges & Solutions
+
+### 1. CSS Performance Optimization
+
+**Challenge**: Balancing design richness with loading performance **Solution**:
+Critical/non-critical CSS splitting with automated inlining
+
+### 2. JSON Resume Integration
+
+**Challenge**: Making structured resume data editable and maintainable
+**Solution**: Hugo shortcodes with JSON schema validation
+
+### 3. Build Process Complexity
+
+**Challenge**: Managing multiple build tools and dependencies **Solution**:
+Comprehensive npm scripts and GitHub Actions automation
+
+### 4. Theme Customization
+
+**Challenge**: Extending Gruvbox theme without breaking updates **Solution**:
+Strategic CSS overrides and custom layout partials
 
 ## Future Enhancements
 
-**Planned Features**:
+**Planned Features:**
 
-- **Comments system**: Utterances or Disqus integration
-- **Newsletter**: RSS feed and email subscriptions
-- **Project galleries**: Enhanced project showcases
-- **Search functionality**: Site-wide content search
+- **Comments System**: Utterances integration for blog discussions
+- **Newsletter**: RSS feed improvements and email subscriptions
+- **Project Galleries**: Enhanced visual project showcases
+- **Analytics Dashboard**: Custom visitor insights and metrics
 
-**Technical Improvements**:
+**Technical Improvements:**
 
-- **Progressive Web App**: Offline capabilities
-- **Advanced analytics**: Detailed visitor insights
-- **Performance monitoring**: Core Web Vitals tracking
-- **Content management**: Headless CMS integration
+- **Progressive Web App**: Service worker for offline capabilities
+- **Advanced Search**: Full-text search with filtering
+- **Performance Monitoring**: Real User Monitoring (RUM)
+- **Content Management**: Headless CMS integration for non-technical updates
 
-This portfolio represents more than just a website—it's a living document of my
-professional journey and a platform for sharing knowledge with the developer
-community.
+This portfolio represents a modern approach to developer websites, combining
+aesthetic appeal with technical excellence and optimal performance.
 
 ---
 
-**Technologies Used**: Hugo, GitHub Pages, GitHub Actions, HTML/CSS, Markdown,
-Git
+**Technologies Used**: Hugo, Gruvbox Theme, GitHub Pages, GitHub Actions,
+PostCSS, JSON Resume, Prism.js, FlexSearch
 
-**Live Site**: [shubhpsd.github.io](https://shubhpsd.github.io) **Source Code**:
+**Live Site**: [shubhpsd.github.io](https://shubhpsd.github.io)  
+**Source Code**:
 [GitHub Repository](https://github.com/shubhpsd/shubhpsd.github.io)
