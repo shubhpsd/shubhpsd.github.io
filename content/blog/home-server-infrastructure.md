@@ -16,6 +16,7 @@ tags:
     "immich",
     "tailscale",
   ]
+toc: true
 ---
 
 In an era where data privacy and ownership are becoming increasingly important,

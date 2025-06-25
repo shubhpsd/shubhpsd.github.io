@@ -4,7 +4,7 @@ date: "{{ .Date }}"
 draft: true
 comments: false
 socialShare: true
-toc: false
+toc: true
 cover:
   src: cover.png
 ---

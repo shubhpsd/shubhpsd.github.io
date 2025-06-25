@@ -15,6 +15,7 @@ tags:
     "css",
     "automation",
   ]
+toc: true
 ---
 
 Every developer needs a professional online presence. This website represents my

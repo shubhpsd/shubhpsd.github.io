@@ -15,6 +15,7 @@ tags:
     "davinci-resolve",
     "photoshop",
   ]
+toc: true
 ---
 
 This portfolio showcases my design journey across multiple tools and projects.

@@ -12,6 +12,7 @@ cover:
   alt:
     "GitHubFetch CLI tool in action showing GitHub profile with contribution
     heatmap"
+toc: true
 ---
 
 {{< figure src="demo.gif" alt="GitHubFetch CLI tool in action" class="media-container" >}}
@@ -217,7 +218,7 @@ githubfetch/
 └── requirements.txt
 ```
 
-2. **Setup Configuration**:
+1. **Setup Configuration**:
 
 ```python
 from setuptools import setup, find_packages

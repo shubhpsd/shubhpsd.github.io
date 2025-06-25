@@ -3,6 +3,7 @@ title: "Expense Tracker App"
 date: 2025-06-02
 description: "A simple and intuitive app to track your expenses."
 tags: ["finance", "productivity", "streamlit"]
+toc: true
 ---
 
 Introducing my new Personal Expense Tracker App! Built using Python, Streamlit,

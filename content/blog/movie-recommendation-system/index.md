@@ -12,6 +12,7 @@ tags:
     "data-science",
     "streamlit",
   ]
+toc: true
 ---
 
 I recently developed a comprehensive movie recommendation system using the

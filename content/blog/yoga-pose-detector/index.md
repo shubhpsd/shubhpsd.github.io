@@ -6,6 +6,7 @@ description:
   "How I built a computer vision application that detects 107 yoga poses with
   85-95% accuracy"
 tags: ["machine-learning", "computer-vision", "python", "pytorch", "mediapipe"]
+toc: true
 ---
 
 In this post, I'll walk you through how I built a real-time yoga pose detection
