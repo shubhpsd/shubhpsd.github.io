@@ -15,8 +15,6 @@ cover:
 toc: true
 ---
 
-{{< figure src="demo.gif" alt="GitHubFetch CLI tool in action" class="media-container" >}}
-
 Ever wanted to check out someone's GitHub profile without leaving your terminal?
 I built **GitHubFetch** - a Python CLI tool inspired by system fetch tools like
 `neofetch` that displays beautiful, stylized GitHub profiles directly in your
