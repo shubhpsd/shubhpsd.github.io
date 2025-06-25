@@ -1,4 +1,4 @@
-baseURL = "https://shubhpsd.github.io"
+baseURL = "http://localhost"
 copyright = "Copyright © 2021"
 title = "Shubham Prasad"
 #paginate = 10
