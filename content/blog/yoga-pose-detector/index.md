@@ -7,6 +7,10 @@ description:
   85-95% accuracy"
 tags: ["machine-learning", "computer-vision", "python", "pytorch", "mediapipe"]
 toc: true
+cover:
+  src: ./yoga-cover.webp
+  alt:
+    "People in movie theatre."
 ---
 
 In this post, I'll walk you through how I built a real-time yoga pose detection

@@ -16,6 +16,10 @@ tags:
     "photoshop",
   ]
 toc: true
+cover:
+  src: ./design-cover.webp
+  alt:
+    "Graphic Designer Image"
 ---
 
 This portfolio showcases my design journey across multiple tools and projects.

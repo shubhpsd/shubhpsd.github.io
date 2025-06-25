@@ -13,6 +13,10 @@ tags:
     "streamlit",
   ]
 toc: true
+cover:
+  src: ./movie-cover.webp
+  alt:
+    "People in movie theatre."
 ---
 
 I recently developed a comprehensive movie recommendation system using the

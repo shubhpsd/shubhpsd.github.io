@@ -4,6 +4,9 @@ date: 2025-06-02
 description: "A simple and intuitive app to track your expenses."
 tags: ["finance", "productivity", "streamlit"]
 toc: true
+cover:
+  src: ./cover-track-expense.webp
+  alt: "Expense Tracker App interface showing dashboard with spending visualizations and budget management"
 ---
 
 Introducing my new Personal Expense Tracker App! Built using Python, Streamlit,

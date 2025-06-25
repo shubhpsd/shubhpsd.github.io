@@ -17,6 +17,9 @@ tags:
     "tailscale",
   ]
 toc: true
+cover:
+  src: ./server-cover.jpg
+  alt: "Home server setup with Dell G5 5587 laptop running Docker containers for self-hosted services"
 ---
 
 In an era where data privacy and ownership are becoming increasingly important,
