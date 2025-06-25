@@ -2,10 +2,10 @@
   "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
   "basics": {
     "name": "Shubham Prasad",
-    "label": "Finance and Machine Learning Enthusiast",
+    "label": "Finance and Tech Enthusiast",
     "image": "/shubham-prasad.webp",
-    "email": "shubhamprasad285@gmail.com",
-    "phone": "+91 8368394425",
+    "email": "shubhampsd@tuta.io",
+    "phone": "",
     "summary": "Currently pursuing Post Graduate Diploma in Statistical Methods and Analytics at Indian Statistical Institute. Passionate about applying machine learning solutions to finance and building data science projects. Experienced in computer vision, recommendation systems, and financial analysis with a strong background in Python, R, SQL and learning low level languages like C, Rust, Go and Bash Scripting.",
     "location": {
       "city": "Delhi",
