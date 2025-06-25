@@ -1,5 +1,4 @@
 ---
-title: "About"
 draft: false
 description: "About Shubham Prasad - Finance and Machine Learning Enthusiast"
 ---
@@ -100,7 +99,7 @@ _Maharaja Agrasen Institute of Management Studies_ (Aug 2021 - Jun 2024)
 
 ## Get In Touch
 
-**Email:** [shubhamprasad285@gmail.com](mailto:shubhamprasad285@gmail.com)  
+**Email:** [shubhampsd@tuta.io](mailto:shubhampsd@tuta.io)  
 **Phone:** +91 8368394425  
 **Location:** Delhi, India
 
@@ -108,6 +107,7 @@ _Maharaja Agrasen Institute of Management Studies_ (Aug 2021 - Jun 2024)
 
 - [LinkedIn](https://www.linkedin.com/in/shubhpsd/)
 - [GitHub](https://github.com/shubhpsd)
+- [Twitter](https://x.com/shubhampsd)
 
 I'm always interested in hearing about new opportunities, collaborations, and
 interesting projects in finance, machine learning, and technology.
