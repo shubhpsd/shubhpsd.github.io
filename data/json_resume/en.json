@@ -1,155 +1,250 @@
 {
   "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
   "basics": {
-    "name": "Richard Hendricks",
-    "label": "Programmer",
-    "image": "https://hugo-theme-gruvbox.schnerring.net/richard-hendricks.webp",
-    "email": "richard.hendricks@piedpiper.com",
-    "phone": "(912) 555-4321",
-    "summary": "Richard hails from Tulsa. He has earned degrees from the University of Oklahoma and Stanford. Before starting Pied Piper, he worked for Hooli as a part time software developer. While his work focuses on applied information theory, mostly optimizing lossless compression schema of both the length-limited and adaptive variants, his non-work interests range widely, everything from quantum computing to chaos theory.",
+    "name": "Shubham Prasad",
+    "label": "Finance and Machine Learning Enthusiast",
+    "image": "/shubham-prasad.webp",
+    "email": "shubhamprasad285@gmail.com",
+    "phone": "+91 8368394425",
+    "summary": "Currently pursuing Post Graduate Diploma in Statistical Methods and Analytics at Indian Statistical Institute. Passionate about applying machine learning solutions to finance and building data science projects. Experienced in computer vision, recommendation systems, and financial analysis with a strong background in Python, R, SQL and learning low level languages like C, Rust, Go and Bash Scripting.",
     "location": {
-      "city": "San Francisco"
+      "city": "Delhi",
+      "country": "India"
     },
     "profiles": [
       {
         "network": "GitHub",
-        "username": "hugo-theme-gruvbox",
-        "url": "https://github.com/schnerring/hugo-theme-gruvbox"
+        "username": "shubhpsd",
+        "url": "https://github.com/shubhpsd"
       },
       {
-        "network": "GitHub",
-        "username": "hugo-mod-json-resume",
-        "url": "https://github.com/schnerring/hugo-mod-json-resume"
+        "network": "LinkedIn",
+        "username": "shubhampsd",
+        "url": "https://linkedin.com/in/shubhampsd/"
       },
       {
         "network": "X",
-        "url": "https://x.com/SiliconHBO"
+        "username": "psdshubham",
+        "url": "https://x.com/psdshubham"
       },
       {
-        "network": "fandom",
-        "url": "https://silicon-valley.fandom.com/wiki/Richard_Hendricks"
-      },
-      {
-        "network": "HBO",
-        "url": "https://www.hbo.com/silicon-valley"
-      },
-      {
-        "network": "IMDB",
-        "url": "https://www.imdb.com/title/tt2575988/"
-      },
-      {
-        "network": "Wikipedia",
-        "url": "https://en.wikipedia.org/wiki/List_of_Silicon_Valley_characters#Richard_Hendricks"
+        "network": "Gmail",
+        "username": "shubhamprasad285@gmail.com",
+        "url": "mailto:shubhamprasad285@gmail.com"
       }
     ]
   },
   "work": [
     {
-      "name": "Pied Piper",
-      "location": "Palo Alto, CA",
-      "description": "Awesome compression company",
-      "position": "CEO/President",
-      "url": "http://piedpiper.com",
-      "startDate": "2013-12-01",
-      "endDate": "2014-12-01",
-      "summary": "Pied Piper is a multi-platform technology based on a proprietary universal compression algorithm that has consistently fielded high Weisman Scores™ that are not merely competitive, but approach the theoretical limit of lossless compression.",
+      "name": "Foxhog Ventures Corp. USA",
+      "location": "New Delhi, IN",
+      "description": "Investment Firm",
+      "position": "Finance Intern",
+      "url": "https://foxhogbank.co.in/",
+      "startDate": "2025-06-01",
+      "endDate": "Present",
+      "summary": "Conducting comprehensive due diligence on a portfolio of high-growth technology and fintech companies.",
       "highlights": [
-        "Build an algorithm for artist to detect if their music was violating copy right infringement laws",
-        "Successfully won Techcrunch Disrupt",
-        "Optimized an algorithm that holds the current world record for Weisman Scores"
+        "Conducting comprehensive due diligence on a portfolio of 6 high-growth technology and fintech companies, building detailed Discounted Cash Flow (DCF) models to determine intrinsic valuation and support investment theses",
+        "Identifying and tracking key financial and operational performance indicators (KPIs) -- including MRR, CAC, etc. in a multimillion dollar portfolio to monitor company health and report on investment performance",
+        "Synthesizing findings from financial models and market research into comprehensive investment memorandums, providing data-driven recommendations to the senior team"
       ]
-    }
-  ],
-  "volunteer": [
-    {
-      "organization": "CoderDojo",
-      "position": "Teacher",
-      "url": "http://coderdojo.example.com/",
-      "startDate": "2012-01-01",
-      "endDate": "2013-01-01",
-      "summary": "Global movement of free coding clubs for young people.",
-      "highlights": ["Awarded 'Teacher of the Month'"]
     }
   ],
   "education": [
     {
-      "institution": "University of Oklahoma",
-      "url": "https://www.ou.edu/",
-      "area": "Information Technology",
+      "institution": "Indian Statistical Institute",
+      "url": "https://www.isine.ac.in/",
+      "area": "Statistical Methods and Analytics",
+      "studyType": "PGD",
+      "startDate": "2024-08-01",
+      "endDate": "2025-06-01",
+      "score": "",
+      "courses": [
+        "Statistical Computing",
+        "Machine Learning",
+        "Financial Analytics",
+        "Data Science"
+      ]
+    },
+    {
+      "institution": "Maharaja Agrasen Institute of Management Studies",
+      "url": "https://maims.ac.in/",
+      "area": "Commerce (Honours)",
       "studyType": "Bachelor",
-      "startDate": "2011-06-01",
-      "endDate": "2014-01-01",
-      "score": "4.0",
-      "courses": ["DB1101 - Basic SQL", "CS2011 - Java Introduction"]
-    }
-  ],
-  "awards": [
-    {
-      "title": "Digital Compression Pioneer Award",
-      "date": "2014-11-01",
-      "awarder": "Techcrunch",
-      "summary": "There is no spoon."
-    }
-  ],
-  "publications": [
-    {
-      "name": "Video compression for 3d media",
-      "publisher": "Hooli",
-      "releaseDate": "2014-10-01",
-      "url": "http://en.wikipedia.org/wiki/Silicon_Valley_(TV_series)",
-      "summary": "Innovative middle-out compression algorithm that changes the way we store data."
+      "startDate": "2021-08-01",
+      "endDate": "2024-06-01",
+      "score": "",
+      "courses": [
+        "Financial Management",
+        "Business Analytics",
+        "Economics",
+        "Accounting"
+      ]
     }
   ],
   "skills": [
     {
-      "name": "Web Development",
-      "level": "Master",
-      "keywords": ["HTML", "CSS", "Javascript"]
+      "name": "Programming Languages",
+      "level": "Advanced",
+      "keywords": [
+        "Python",
+        "R",
+        "SQL",
+        "C++",
+        "Go",
+        "Bash Scripting",
+        "HTML/CSS"
+      ]
     },
     {
-      "name": "Compression",
-      "level": "Master",
-      "keywords": ["Mpeg", "MP4", "GIF"]
+      "name": "Machine Learning & Data Science",
+      "level": "Advanced",
+      "keywords": [
+        "PyTorch",
+        "Scikit-learn",
+        "Pandas",
+        "NumPy",
+        "Matplotlib",
+        "Seaborn",
+        "OpenCV"
+      ]
+    },
+    {
+      "name": "Frameworks & Tools",
+      "level": "Intermediate",
+      "keywords": [
+        "Streamlit",
+        "MediaPipe",
+        "Git",
+        "Docker",
+        "Linux",
+        "Tableau",
+        "Power BI",
+        "Excel",
+        "SQLite",
+        "PyPI"
+      ]
     }
   ],
   "languages": [
     {
       "language": "English",
+      "fluency": "Fluent"
+    },
+    {
+      "language": "Hindi",
       "fluency": "Native speaker"
-    }
-  ],
-  "interests": [
+    },
     {
-      "name": "Wildlife",
-      "keywords": ["Ferrets", "Unicorns"]
-    }
-  ],
-  "references": [
-    {
-      "name": "Erlich Bachman",
-      "reference": "It is my pleasure to recommend Richard, his performance working as a consultant for Main St. Company proved that he will be a valuable addition to any company."
+      "language": "German",
+      "fluency": "Beginner"
     }
   ],
   "projects": [
     {
-      "name": "Miss Direction",
-      "description": "A mapping engine that misguides you",
+      "name": "Project",
+      "description": "End-to-end computer vision pipeline that classifies 107 distinct yoga poses from live video stream",
       "highlights": [
-        "Won award at AIHacks 2016",
-        "Built by all women team of newbie programmers",
-        "Using modern technologies such as GoogleMaps, Chrome Extension and Javascript"
+        "Built and deployed an end-to-end computer vision pipeline that classifies 107 distinct yoga poses from a live video stream, achieving approximately 75% accuracy on a 5.6k image test dataset",
+        "Leveraged the MediaPipe framework for real-time human pose estimation, extracting key body landmarks as input for the classification model"
       ],
-      "keywords": ["GoogleMaps", "Chrome Extension", "Javascript"],
-      "startDate": "2016-08-24",
-      "endDate": "2016-08-24",
-      "roles": ["Team lead", "Designer"],
-      "entity": "Smoogle",
+      "keywords": [
+        "ML",
+        "Computer Vision",
+        "Python",
+        "Streamlit",
+        "MediaPipe",
+        "PyTorch"
+      ],
+      "startDate": "2025-04-01",
+      "endDate": "2025-05-01",
+      "url": "https://detectpose.streamlit.app/",
+      "roles": ["Yoga Pose Classifier & Feedback System"],
+      "entity": "Personal Project",
       "type": "application"
+    },
+    {
+      "name": "Project",
+      "description": "Hybrid recommendation engine combining content-based filtering and popularity-based model",
+      "highlights": [
+        "Architected a hybrid recommendation engine combining content-based filtering and a popularity-based model to deliver robust suggestions and effectively mitigate the cold-start problem for new users",
+        "Utilized Scikit-learn to build a TF-IDF vectorizer, transforming movie metadata into a 5,000-dimensional feature space for calculating content similarity"
+      ],
+      "keywords": [
+        "Recommender Systems",
+        "NLP",
+        "Python",
+        "Scikit-learn",
+        "TF-IDF"
+      ],
+      "startDate": "2025-05-01",
+      "endDate": "2025-06-01",
+      "url": "https://github.com/shubhpsd/movie-recosystem",
+      "roles": ["Dual-Model Movie Recommendation System"],
+      "entity": "Personal Project",
+      "type": "application"
+    },
+    {
+      "name": "Project",
+      "description": "Python CLI tool for viewing stylized GitHub profiles directly in the terminal",
+      "highlights": [
+        "Developed and published `githubfetch` on PyPI, a Python CLI tool for viewing stylized GitHub profiles directly in the terminal, inspired by system fetch tools like neofetch",
+        "Engineered the tool to query the GitHub GraphQL and Rest API, parsing JSON data to display user info, pinned repositories, and a horizontal contribution heatmap"
+      ],
+      "keywords": ["Python", "GraphQL", "Rest API", "CLI", "PyPI"],
+      "startDate": "2025-03-01",
+      "endDate": "2025-04-01",
+      "url": "https://github.com/shubhpsd/githubfetch",
+      "roles": ["GitHubFetch CLI Tool"],
+      "entity": "Open Source",
+      "type": "tool"
+    },
+    {
+      "name": "Project",
+      "description": "Interactive dashboard for financial transaction management and analysis",
+      "highlights": [
+        "Engineered an interactive dashboard in Streamlit with a SQLite backend, allowing for full CRUD (Create, Read, Update, Delete) management of financial transactions",
+        "Developed dynamic data visualizations using Matplotlib and Seaborn to track spending patterns across 6+ custom categories, providing actionable insights into personal finance"
+      ],
+      "keywords": ["Python", "Streamlit", "Pandas", "Matplotlib", "SQLite"],
+      "startDate": "2025-01-01",
+      "endDate": "2025-02-01",
+      "url": "https://track-expense.streamlit.app/",
+      "roles": ["Personal Financial Analytics Dashboard"],
+      "entity": "Personal Project",
+      "type": "application"
+    }
+  ],
+  "awards": [
+    {
+      "title": "Machine Learning by Stanford University",
+      "date": "2025-05-01",
+      "awarder": "Coursera",
+      "summary": "Completed comprehensive machine learning course covering supervised and unsupervised learning algorithms."
+    },
+    {
+      "title": "Python and Statistics for Financial Analysis",
+      "date": "2025-04-01",
+      "awarder": "Coursera",
+      "summary": "Applied Python programming and statistical methods for financial data analysis and modeling."
+    },
+    {
+      "title": "JPMorgan Chase Investment Banking Job Simulation",
+      "date": "2024-01-01",
+      "awarder": "Forage",
+      "summary": "Completed virtual work experience program in investment banking and financial analysis."
+    },
+    {
+      "title": "Data Analysis Using Excel And Python",
+      "date": "2022-08-01",
+      "awarder": "MAIMS",
+      "summary": "Comprehensive training in data analysis techniques using Excel and Python programming."
     }
   ],
   "meta": {
     "canonical": "https://raw.githubusercontent.com/jsonresume/resume-schema/master/resume.json",
     "version": "v1.0.0",
-    "lastModified": "2017-12-24T15:53:00"
+    "lastModified": "2025-06-25T04:20:00"
   }
 }

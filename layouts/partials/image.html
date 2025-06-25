@@ -31,8 +31,8 @@
   <!-- Image from page bundle -->
   {{ $images := .page.Resources.ByType "image" }}
   {{ $image := $images.GetMatch $src }}
-  {{ if eq $image.MediaType.SubType "svg" }}
-    <!-- No processing for SVGs -->
+  {{ if or (eq $image.MediaType.SubType "svg") (eq $image.MediaType.SubType "gif") }}
+    <!-- No processing for SVGs and GIFs to preserve animation -->
     <img src="{{ $image.RelPermalink }}" alt="{{ .alt }}" />
   {{ else }}
     <!-- Calculate resize widths in increments of 100px -->

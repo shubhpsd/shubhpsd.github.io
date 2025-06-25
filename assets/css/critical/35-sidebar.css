@@ -60,6 +60,29 @@ aside.toc {
 }
 
 .jr-basics__profile {
+  /* Override default column layout to display icons in a row */
+  &.jr-basics__profile--col {
+    flex-direction: row !important;
+    gap: 1rem;
+    justify-content: flex-start;
+  }
+
+  /* Hide the username text labels */
+  & .jr-basics__profile-username {
+    display: none;
+  }
+
+  /* Adjust profile item spacing */
+  & .jr-basics__profile-item {
+    padding: 0.2rem;
+  }
+
+  /* Ensure icons are properly sized */
+  & .jr-basics__profile-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
   & a:hover {
     color: var(--fg3);
 

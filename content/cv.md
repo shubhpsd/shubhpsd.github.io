@@ -2,6 +2,7 @@
 title: "CV"
 draft: false
 type: "cv"
+description: "Curriculum Vitae - Shubham Prasad"
 ---
 
 ## Experience
@@ -12,38 +13,18 @@ type: "cv"
 
 {{< json-resume "education" >}}
 
-## Volunteering
+## Projects
 
-{{< json-resume "volunteer" >}}
-
-## Awards
-
-{{< json-resume "awards" >}}
-
-## Certificates
-
-{{< json-resume "certificates" >}}
-
-## Publications
-
-{{< json-resume "publications" >}}
+{{< json-resume "projects" >}}
 
 ## Skills
 
 {{< json-resume "skills" >}}
 
+## Awards & Certifications
+
+{{< json-resume "awards" >}}
+
 ## Languages
 
 {{< json-resume "languages" >}}
-
-## Interests
-
-{{< json-resume "interests" >}}
-
-## References
-
-{{< json-resume "references" >}}
-
-## Projects
-
-{{< json-resume "projects" >}}
