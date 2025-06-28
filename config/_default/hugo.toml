@@ -1,5 +1,5 @@
 baseURL = "http://localhost"
-copyright = "Copyright © 2021"
+copyright = "Copyright © 2025 Shubham Prasad"
 title = "Shubham Prasad"
 #paginate = 10
 enableRobotsTXT = true
@@ -45,8 +45,8 @@ enableRobotsTXT = true
   themeColor = "aqua"
   # soft medium hard, defaults to medium
   #themeContrast = "medium"
-  author = "Michael Schnerring"
-  subtitle = "Theme Demo"
+  author = "Shubham Prasad"
+  subtitle = "Portfolio"
   description = "A retro-looking Hugo theme inspired by gruvbox. The pastel colors are high contrast, easily distinguishable, pleasing to the eye, and feature light and dark color palettes."
 
   [params.logo]
