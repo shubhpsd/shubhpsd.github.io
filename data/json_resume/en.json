@@ -36,18 +36,17 @@
   },
   "work": [
     {
-      "name": "Foxhog Ventures Corp. USA",
-      "location": "New Delhi, IN",
-      "description": "Investment Firm",
-      "position": "Finance Intern",
-      "url": "https://foxhogbank.co.in/",
-      "startDate": "2025-06-01",
-      "endDate": "Present",
-      "summary": "Conducting comprehensive due diligence on a portfolio of high-growth technology and fintech companies.",
+      "name": "Glued Entertainment",
+      "location": "Noida, UP, IN",
+      "description": "Arcade Center",
+      "position": "Marketing Intern",
+      "url": "https://gluedsupercharged.com/",
+      "startDate": "2023-12",
+      "endDate": "2024-02",
+      "summary": "Helped optimize online brand prescence through SEO and AD tools.",
       "highlights": [
-        "Conducting comprehensive due diligence on a portfolio of 6 high-growth technology and fintech companies, building detailed Discounted Cash Flow (DCF) models to determine intrinsic valuation and support investment theses",
-        "Identifying and tracking key financial and operational performance indicators (KPIs) -- including MRR, CAC, etc. in a multimillion dollar portfolio to monitor company health and report on investment performance",
-        "Synthesizing findings from financial models and market research into comprehensive investment memorandums, providing data-driven recommendations to the senior team"
+        "Increased organic website traffic by 18% by analyzing Google Analytics data to identify and recommend optimizations for 200+ underperforming keywords.",
+        "Reduced manual reporting efforts by 5 hours per week by building and automating performance dashboards using Python and Tableau to track 7+ core KPIs."
       ]
     }
   ],
