@@ -31,9 +31,10 @@
   <!-- Image from page bundle -->
   {{ $images := .page.Resources.ByType "image" }}
   {{ $image := $images.GetMatch $src }}
-  {{ if or (eq $image.MediaType.SubType "svg") (eq $image.MediaType.SubType "gif") }}
-    <!-- No processing for SVGs and GIFs to preserve animation -->
-    <img src="{{ $image.RelPermalink }}" alt="{{ .alt }}" />
+  {{ if $image }}
+    {{ if or (eq $image.MediaType.SubType "svg") (eq $image.MediaType.SubType "gif") }}
+      <!-- No processing for SVGs and GIFs to preserve animation -->
+      <img src="{{ $image.RelPermalink }}" alt="{{ .alt }}" />
   {{ else }}
     <!-- Calculate resize widths in increments of 100px -->
     {{ $minWidth := .page.Site.Params.imageResize.min | default 300 }}
@@ -85,6 +86,10 @@
       />
     </picture>
   {{ end }}
+{{ else }}
+  <!-- Image not found in page bundle, show placeholder or skip -->
+  {{ warnf "Image not found: %s in page %s" .src .page.RelPermalink }}
+{{ end }}
 {{ end }}
 
 
