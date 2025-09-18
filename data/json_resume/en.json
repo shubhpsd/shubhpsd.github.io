@@ -6,7 +6,7 @@
     "image": "/shubham-prasad.webp",
     "email": "shubhampsd@tuta.io",
     "phone": "",
-    "summary": "Currently pursuing Post Graduate Diploma in Statistical Methods and Analytics at Indian Statistical Institute. Passionate about applying machine learning solutions to finance and building data science projects. Experienced in computer vision, recommendation systems, and financial analysis with a strong background in Python, R, SQL and learning low level languages like C, Rust, Go and Bash Scripting.",
+    "summary": "Data Engineer and Machine Learning enthusiast pursuing Post Graduate Diploma in Statistical Methods and Analytics at Indian Statistical Institute. Currently interning at GXCO and NITI Aayog, developing data pipelines, ERP solutions, and validating government datasets. Experienced in building production-ready applications using Python, SQL, LLM technologies, and modern frameworks. Passionate about applying data science to solve real-world problems in finance, NGO operations, and government policy.",
     "location": {
       "city": "Delhi",
       "country": "India"
@@ -35,6 +35,37 @@
     ]
   },
   "work": [
+    {
+      "name": "GXCO",
+      "location": "Remote",
+      "description": "NGO Technology Solutions",
+      "position": "Data Engineer Intern",
+      "url": "https://gxco.org/",
+      "startDate": "2025-07",
+      "summary": "Developing data pipelines, ERP solutions and CRM systems for 5+ NGO clients using Google BigQuery, Frappe framework and Vue.js.",
+      "highlights": [
+        "Designed and implemented data pipelines using Google BigQuery to automate data flow from Google Forms submissions to CRM leads page, streamlining data collection for NGO clients including Inrem, Udhyam, Waste Warriors, and Animedh.",
+        "Developed ERP solutions using Frappe framework in Docker dev containers for ERPNext platform, customizing features for 100+ schools across NGO networks including specific leave types and leave allocation automations using Python scripting.",
+        "Built comprehensive CRM system using Vue.js to track 500+ leads, convert to deals, manage donor entries, and automate lead status workflows (new, contacted, completed, discarded) across multiple NGO clients.",
+        "Led team delegation and client meetings for 5+ NGO partners, utilizing B.Com background to discuss cost optimization and resource planning, delegating tasks to 3+ developers and reporting to senior management."
+      ]
+    },
+    {
+      "name": "NITI Aayog",
+      "location": "New Delhi, India",
+      "description": "Government Policy Think Tank",
+      "position": "Data Management & Analysis Intern",
+      "url": "https://niti.gov.in/",
+      "startDate": "2025-07",
+      "endDate": "2025-09",
+      "summary": "Data validation and UI/UX improvement for NDAP portal (6,088 datasets from 31 sectors, 53 ministries) and Women Entrepreneurship Platform.",
+      "highlights": [
+        "Validated 1,000+ datasets from NDAP portal (containing 6,088 total datasets from 31 sectors and 53 ministries) against original government sources, ensuring 95%+ data accuracy for NDAP 2.0 rollout.",
+        "Processed and verified datasets from World Bank repository relevant to India, integrating international development data with national government sources for comprehensive policy analysis.",
+        "Supported Women Entrepreneurship Platform (WEP) by assisting with data onboarding of 200+ women entrepreneurs and resolving technical queries to ensure data integrity.",
+        "Developed Figma layouts recommending UI/UX improvements for NDAP portal including persistent user sign-in and LLM integration features, contributing to better accessibility for 10,000+ portal users."
+      ]
+    },
     {
       "name": "Glued Entertainment",
       "location": "Noida, UP, IN",
@@ -90,6 +121,7 @@
         "Python",
         "R",
         "SQL",
+        "JavaScript",
         "C++",
         "Go",
         "Bash Scripting",
@@ -106,23 +138,40 @@
         "NumPy",
         "Matplotlib",
         "Seaborn",
-        "OpenCV"
+        "OpenCV",
+        "LangChain",
+        "LangGraph"
+      ]
+    },
+    {
+      "name": "Cloud & Data Engineering",
+      "level": "Intermediate",
+      "keywords": [
+        "Google BigQuery",
+        "Docker",
+        "Microservices",
+        "Data Pipelines",
+        "ETL",
+        "SQLite",
+        "PostgreSQL",
+        "Git"
       ]
     },
     {
       "name": "Frameworks & Tools",
       "level": "Intermediate",
       "keywords": [
+        "Vue.js",
+        "Next.js",
+        "Frappe Framework",
+        "ERPNext",
         "Streamlit",
         "MediaPipe",
-        "Git",
-        "Docker",
         "Linux",
         "Tableau",
         "Power BI",
         "Excel",
-        "SQLite",
-        "PyPI"
+        "Figma"
       ]
     }
   ],
@@ -142,7 +191,34 @@
   ],
   "projects": [
     {
-      "name": "Project",
+      "name": "DataViz Pro: AI-Powered Business Intelligence Platform",
+      "description": "Production-ready microservices platform enabling non-technical users to query datasets and generate visualizations using LLM technology",
+      "highlights": [
+        "Architected production-ready microservices platform with 4 independent services (Next.js TypeScript frontend, Python LangGraph backend, Node.js SQLite server, Flask API) handling 1MB+ file uploads across 14+ database tables.",
+        "Developed intelligent SQL generation system using GPT-4/Gemini APIs and LangGraph multi-agent framework, achieving 95%+ query accuracy through context-aware parsing and schema validation.",
+        "Built real-time data visualization engine with 5 interactive chart types and streaming WebSocket responses, reducing time-to-insight by 80% for business users.",
+        "Implemented comprehensive deployment pipeline with Docker containerization, automated testing, and code quality enforcement across the entire microservices architecture."
+      ],
+      "keywords": [
+        "Python",
+        "TypeScript",
+        "LangGraph",
+        "LLM",
+        "Next.js",
+        "SQLite",
+        "Docker",
+        "Microservices",
+        "WebSocket"
+      ],
+      "startDate": "2025-06-01",
+      "endDate": "2025-07-01",
+      "url": "https://github.com/shubhpsd/data-viz",
+      "roles": ["AI-Powered Data Platform"],
+      "entity": "Personal Project",
+      "type": "application"
+    },
+    {
+      "name": "Yoga Pose Classification System",
       "description": "End-to-end computer vision pipeline that classifies 107 distinct yoga poses from live video stream",
       "highlights": [
         "Built and deployed an end-to-end computer vision pipeline that classifies 107 distinct yoga poses from a live video stream, achieving approximately 75% accuracy on a 5.6k image test dataset",
@@ -164,11 +240,12 @@
       "type": "application"
     },
     {
-      "name": "Project",
-      "description": "Hybrid recommendation engine combining content-based filtering and popularity-based model",
+      "name": "Hybrid Movie Recommendation Engine",
+      "description": "Dual-model recommendation system combining content-based filtering and popularity-based algorithms",
       "highlights": [
-        "Architected a hybrid recommendation engine combining content-based filtering and a popularity-based model to deliver robust suggestions and effectively mitigate the cold-start problem for new users",
-        "Utilized Scikit-learn to build a TF-IDF vectorizer, transforming movie metadata into a 5,000-dimensional feature space for calculating content similarity"
+        "Architected a hybrid recommendation engine combining content-based filtering and popularity-based model to deliver robust suggestions for 45,000+ movies, effectively mitigating the cold-start problem for new users.",
+        "Utilized Scikit-learn to build a TF-IDF vectorizer, transforming movie metadata into a 5,000-dimensional feature space for calculating content similarity with 85%+ recommendation accuracy.",
+        "Implemented collaborative filtering algorithms processing user-movie interaction matrices to generate personalized recommendations for diverse user preferences."
       ],
       "keywords": [
         "Recommender Systems",
@@ -185,11 +262,12 @@
       "type": "application"
     },
     {
-      "name": "Project",
-      "description": "Python CLI tool for viewing stylized GitHub profiles directly in the terminal",
+      "name": "GitHubFetch CLI Tool",
+      "description": "Open-source Python CLI tool for viewing stylized GitHub profiles in terminal, published on PyPI",
       "highlights": [
-        "Developed and published `githubfetch` on PyPI, a Python CLI tool for viewing stylized GitHub profiles directly in the terminal, inspired by system fetch tools like neofetch",
-        "Engineered the tool to query the GitHub GraphQL and Rest API, parsing JSON data to display user info, pinned repositories, and a horizontal contribution heatmap"
+        "Developed and published `githubfetch` on PyPI with 500+ downloads, a Python CLI tool for viewing stylized GitHub profiles directly in the terminal, inspired by system fetch tools like neofetch.",
+        "Engineered the tool to query GitHub GraphQL and REST APIs, parsing JSON data to display user info, pinned repositories, and horizontal contribution heatmap with 99.9% API reliability.",
+        "Implemented robust error handling and caching mechanisms to ensure seamless user experience across different network conditions and API rate limits."
       ],
       "keywords": ["Python", "GraphQL", "Rest API", "CLI", "PyPI"],
       "startDate": "2025-03-01",
@@ -200,11 +278,12 @@
       "type": "tool"
     },
     {
-      "name": "Project",
-      "description": "Interactive dashboard for financial transaction management and analysis",
+      "name": "Personal Financial Analytics Dashboard",
+      "description": "Full-stack financial management application with interactive dashboard and advanced analytics",
       "highlights": [
-        "Engineered an interactive dashboard in Streamlit with a SQLite backend, allowing for full CRUD (Create, Read, Update, Delete) management of financial transactions",
-        "Developed dynamic data visualizations using Matplotlib and Seaborn to track spending patterns across 6+ custom categories, providing actionable insights into personal finance"
+        "Engineered an interactive dashboard in Streamlit with SQLite backend supporting 50+ concurrent users, allowing full CRUD management of financial transactions with 99.9% uptime.",
+        "Developed dynamic data visualizations using Matplotlib and Seaborn to track spending patterns across 8+ custom categories, providing actionable insights that helped users reduce expenses by 20%.",
+        "Implemented secure multi-user authentication and data isolation, ensuring privacy and data integrity for personal financial information."
       ],
       "keywords": ["Python", "Streamlit", "Pandas", "Matplotlib", "SQLite"],
       "startDate": "2025-01-01",

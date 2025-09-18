@@ -6,14 +6,16 @@ tags: ["finance", "productivity", "streamlit"]
 toc: true
 cover:
   src: ./cover-track-expense.webp
-  alt: "Expense Tracker App interface showing dashboard with spending visualizations and budget management"
+  alt:
+    "Expense Tracker App interface showing dashboard with spending
+    visualizations and budget management"
 ---
 
-Introducing my new Personal Expense Tracker App! Built using Python, Streamlit,
-and SQLite, this application is designed to help you manage your finances
-effectively. With features like multi-user authentication, receipt uploads, and
-dashboard visualizations, it is a must-have tool for anyone looking to stay on
-top of their budget.
+Here's my new very simple Personal Expense Tracker App I built using Python,
+Streamlit, and SQLite, this application is designed to help you manage your
+finances. With features like multi-user authentication, receipt uploads, and
+dashboard visualizations, it is a project I worked on to learn python and it's
+capabilities of designing frontends.
 
 ### Features
 

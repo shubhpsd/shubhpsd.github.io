@@ -1,9 +1,9 @@
 ---
-title: "Movie Recommendation System"
+title: "Movie Recommendation Engine: Netflix but worse"
 date: 2025-06-05
 description:
-  "A comprehensive movie recommendation system built using the MovieLens dataset
-  with popularity-based, content-based, and collaborative filtering techniques."
+  "Built a movie recommendation system that actually gets your taste. Three
+  different algorithms, one goal: find your next binge-watch obsession."
 tags:
   [
     "python",
@@ -11,171 +11,223 @@ tags:
     "recommendation-system",
     "data-science",
     "streamlit",
+    "movielens",
   ]
 toc: true
 cover:
   src: ./movie-cover.webp
-  alt:
-    "People in movie theatre."
+  alt: "People in movie theatre."
 ---
 
-I recently developed a comprehensive movie recommendation system using the
-MovieLens dataset. This project demonstrates various recommendation techniques
-including popularity-based filtering, content-based filtering, and collaborative
-filtering.
+## What I Built
 
-## About the Project
+Ever spend more time scrolling through Netflix than actually watching anything?
+Yeah, me too. So I thought, "What if I could build something that actually knows
+what I want to watch?"
 
-The system helps users discover new movies based on their preferences and
-viewing history. It's built with Python and leverages several machine learning
-techniques to provide personalized movie recommendations.
+Enter my movie recommendation engine - three different algorithms working
+together to find your next favorite film.
 
 {{< video src="demo.mp4" >}}
 
-## Dataset
+## Why I Built This
 
-For this project, I used the
-[MovieLens small dataset](https://grouplens.org/datasets/movielens/) which
-contains approximately 100,000 ratings from 600+ users on 9,000+ movies. This
-smaller dataset is more manageable for version control purposes compared to the
-full dataset which has over 33 million ratings.
+Look, I'm a data nerd who also happens to love movies. But finding good
+recommendations? That's harder than debugging Python at 2 AM.
 
-The dataset includes:
+Most recommendation systems either give you what's popular (boring) or
+completely miss the mark on your taste.
 
-- **movies.csv**: Information about movies (ID, title, genres)
-- **ratings.csv**: User ratings for movies (userID, movieID, rating, timestamp)
-- **tags.csv**: User-generated tags for movies
-- **links.csv**: Links to movie pages on IMDb and TMDb
+I wanted something that actually understands different ways people discover
+movies
 
-## Recommendation Approaches
+Sometimes you want what's trending, sometimes you want more of what you already
+love, and sometimes you want to discover hidden gems based on people with
+similar taste.
 
-### 1. Popularity-Based Recommendations
+## The Dataset Deep Dive
 
-This is the simplest approach that recommends movies based on their popularity
-(average ratings and number of ratings). These recommendations are the same for
-all users regardless of personal preferences.
+I used the
+[MovieLens small dataset](https://grouplens.org/datasets/movielens/) - about
+100,000 ratings from 600+ users rating 9,000+ movies. Why the "small" version?
+Because this is a concept project, and I wanted it to be responsive, will take
+it forward in the future, with the full 33 million+ dataset.
+
+What's in the box:
+
+- **movies.csv**: All the movie info (titles, genres, IDs)
+- **ratings.csv**: The good stuff - who rated what and how much they liked it
+- **tags.csv**: User-generated tags (surprisingly useful!)
+- **links.csv**: Links to IMDb and TMDb pages
+
+## Three Ways to Find Your Next Favorite Movie
+
+### 1. Popular Stuff (For When You Want to Join the Conversation)
+
+Sometimes you just want to watch what everyone's talking about. This approach
+finds movies with great ratings AND enough people actually watching them. No
+point recommending a 5-star movie if only 3 people have seen it, right?
 
 ```python
 def get_popular_recommendations(n=10):
-    # Calculate weighted rating
+    # Calculate weighted rating (IMDB's approach)
     C = df_ratings['rating'].mean()
     m = df_movies_with_ratings['num_ratings'].quantile(0.9)
 
+    # Only consider movies with enough ratings
     qualified = df_movies_with_ratings.copy().loc[df_movies_with_ratings['num_ratings'] >= m]
     qualified['score'] = qualified.apply(weighted_rating, axis=1)
 
-    # Sort movies based on score and return top n
+    # Sort and return the crowd favorites
     qualified = qualified.sort_values('score', ascending=False)
     return qualified[['movieId', 'title', 'genres', 'score']].head(n)
 ```
 
-### 2. Content-Based Filtering
+### 2. More Like This (For When You Know What You Like)
 
-This approach recommends movies similar to ones the user has liked in the past
-based on movie attributes. In my implementation, I used movie genres to find
-similar movies.
+Found a movie you absolutely loved? This finds movies with similar vibes based
+on genres, themes, and other attributes. If you're into sci-fi thrillers, it'll
+find more sci-fi thrillers.
 
 ```python
 def get_content_based_recommendations(movie_title, n=10):
-    # Get the index of the movie in our dataframe
+    # Find the movie in our database
     idx = indices[movie_title]
 
-    # Get the pairwise similarity scores for all movies with that movie
+    # Calculate similarity with all other movies
     sim_scores = list(enumerate(cosine_sim[idx]))
 
-    # Sort the movies based on the similarity scores
+    # Sort by similarity (excluding the input movie itself)
     sim_scores = sorted(sim_scores, key=lambda x: x[1], reverse=True)
-
-    # Get the scores of the 10 most similar movies (excluding the input movie)
     sim_scores = sim_scores[1:n+1]
 
-    # Get the movie indices
+    # Get the most similar movies
     movie_indices = [i[0] for i in sim_scores]
-
-    # Return the top n most similar movies
     return df_movies.iloc[movie_indices][['movieId', 'title', 'genres']]
 ```
 
-### 3. Collaborative Filtering
+### 3. People Like You Also Enjoyed (The Netflix Special)
 
-This approach makes recommendations based on the similarity between users and/or
-items. I implemented Matrix Factorization using Singular Value Decomposition
-(SVD).
+This is where the magic happens - finding people with similar taste and seeing
+what they loved that you haven't watched yet. Uses matrix factorization (fancy
+math) to predict what you'd rate unseen movies.
 
 ```python
 def get_collaborative_filtering_recommendations(user_id, n=10):
-    # Get all movies the user hasn't seen
+    # Find movies this user hasn't seen
     user_ratings = df_ratings[df_ratings['userId'] == user_id]
     movies_user_has_seen = user_ratings['movieId'].tolist()
     movies_to_predict = df_movies[~df_movies['movieId'].isin(movies_user_has_seen)]
 
-    # Predict ratings for all unseen movies
+    # Predict ratings for unseen movies
     predictions = []
     for _, movie in movies_to_predict.iterrows():
-        pred = model.predict(user_id, movie['movieId']).est
-        predictions.append((movie['movieId'], movie['title'], movie['genres'], pred))
+        predicted_rating = model.predict(user_id, movie['movieId']).est
+        predictions.append((movie['movieId'], movie['title'], movie['genres'], predicted_rating))
 
-    # Sort by predicted rating
+    # Sort by predicted rating and return top picks
     predictions.sort(key=lambda x: x[3], reverse=True)
-
-    # Return top n recommendations
     return pd.DataFrame(predictions[:n], columns=['movieId', 'title', 'genres', 'predicted_rating'])
 ```
 
-## Web Application
+## Building the Interface
 
-I built a beautiful Streamlit web application with a Gruvbox Medium theme to
-showcase the recommendation system. The app features:
+### Streamlit Web App (Will change)
 
-- Interactive movie recommendations
-- Data visualizations
-- Multiple recommendation approaches
-- Filtering and sorting options
-- User-friendly interface
+Built a web interface with my favorite Gruvbox Medium theme (because everything
+looks better in retro colors). The app lets you:
 
-<!-- ![Streamlit Web App](streamlit-app.jpg) -->
+- Try all three recommendation types
+- Filter by genre, year, or rating
+- See data visualizations of the recommendations
+- Browse through results with a clean, responsive interface
 
-## Command-Line Interface
+It's actually easy and fun to use. No boring tables or academic-looking charts -
+just smooth interactions and instant results.
 
-For quick recommendations, I also implemented a command-line interface:
+### Command-Line Tool (For the Terminal Nerds)
+
+Because sometimes you just want recommendations without leaving your terminal:
 
 ```bash
-# Get popularity-based recommendations
+# Get what's trending
 ./recommend.py --popular --num 10
 
-# Get content-based recommendations for a movie
+# Find movies like The Matrix
 ./recommend.py --movie "The Matrix (1999)" --num 10
 
-# Get collaborative filtering recommendations for a user
+# Get personalized picks for user 1
 ./recommend.py --user 1 --num 10
 ```
 
-## Challenges and Learnings
+Perfect for when you're deep in a coding session and need a break
+recommendation, or maybe something playing on the second monitor as you code.
 
-Building this recommendation system taught me several important lessons:
+## What I Learned (The Hard Way)
 
-1. **Handling Sparse Data**: Movie ratings are typically very sparse, with most
-   users rating only a small fraction of available movies. Learning to handle
-   this sparsity was crucial.
+### The Sparse Data Reality Check
 
-2. **Cold Start Problem**: Addressing the challenge of recommending movies to
-   new users with little or no history.
+Movie ratings are basically Swiss cheese - full of holes. Most people rate maybe
+50 movies out of thousands available. Teaching an algorithm to make sense of
+this was like solving a puzzle with 90% of the pieces missing.
 
-3. **Balancing Accuracy and Diversity**: Ensuring recommendations aren't too
-   similar while still being relevant.
+The solution? Smart data handling and accepting that sometimes "I don't know" is
+a valid recommendation algorithm response.
 
-4. **Scalability**: Making the system efficient enough to handle large datasets
-   and provide real-time recommendations.
+### The Cold Start Struggle
 
-## Future Improvements
+New users with zero rating history? That's recommendation hell. Can't use
+collaborative filtering, content-based needs preferences to work with.
 
-I plan to enhance the system with:
+My workaround: Start with popular movies, then quickly learn from any ratings
+they give. The system gets smarter with every interaction.
 
-- Additional features for content-based filtering (actors, directors, etc.)
-- Hybrid recommendation approaches
-- User authentication for the web app
-- More detailed evaluation metrics
-- Cloud deployment of the Streamlit app
+### The Echo Chamber Problem
 
-Check out the [GitHub repository](https://github.com/shubhpsd/movie-recosystem)
-for the complete source code and more details about this project!
+Pure collaborative filtering can create recommendation bubbles - you only get
+suggestions similar to what you already like. Sometimes you want to discover
+something completely different.
+
+That's why having multiple approaches matters. Each algorithm brings different
+strengths to the table.
+
+### Performance vs. Accuracy Balancing Act
+
+Real-time recommendations vs. perfect accuracy - pick one. Users won't wait 30
+seconds for the "perfect" recommendation when a "good" one in 2 seconds works
+fine.
+
+Lots of optimization went into making this snappy while keeping recommendations
+relevant.
+
+## What's Next?
+
+This project is in development. Here's what I'm planning to add:
+
+**More Content Features**: Right now I'm only using genres, but movies have so
+much more - directors, actors, release year, even movie poster colors could
+influence recommendations.
+
+**Hybrid Approach**: Combining all three methods intelligently instead of
+treating them separately. Sometimes you want popular + similar, sometimes you
+want collaborative + content-based.
+
+**Real User Accounts**: The Streamlit app currently uses demo data, but I want
+to add user authentication so people can build their own recommendation
+profiles.
+
+**TypeScript Web App**: Let's be honest, Streamlit is basic af. I want to
+rebuild this as a proper web app with Next.js/TypeScript, clean UI components,
+smooth animations, and a way better user experience. Think Netflix-level polish
+but for recommendations.
+
+**Better Evaluation**: More sophisticated metrics to actually measure how good
+the recommendations are. User satisfaction surveys, click-through rates, that
+kind of thing.
+
+**Cloud Deployment**: Getting the app hosted properly so people can actually use
+it without running Python locally.
+
+The [GitHub repository](https://github.com/shubhpsd/movie-recosystem) has all
+the code, datasets, and setup instructions if you want to dive deeper or build
+your own version!

@@ -1,10 +1,10 @@
 ---
-title: "DataViz Pro: Building an AI-Powered Business Intelligence Platform"
+title: "Building DataViz Pro: My Journey into AI-Powered Data Visualization"
 date: 2025-08-11
 draft: false
 description:
-  "Creating a full-stack business intelligence platform with natural language
-  querying using React, Python, LangGraph, and GPT-4/Gemini LLM"
+  "How I built a natural language data visualization tool using React, Python,
+  and LLMs - a learning project that turned into something pretty cool"
 tags:
   [
     "ai",
@@ -21,152 +21,156 @@ tags:
 toc: true
 cover:
   src: ./demo-cover.gif
-  alt:
-    "DataViz Pro demo showing AI-powered data visualization in action with
-    natural language queries and real-time chart generation"
+  alt: "DataViz Pro demo - chat with your data using natural language"
 ---
 
-## The Vision: AI-Powered Data Analysis for Everyone
+## What I Built
 
-During my internship at GXCO, I encountered a common problem: non-technical
-stakeholders struggling to extract insights from complex databases. They had the
-questions, but not the SQL skills. This led me to build **DataViz Pro** - an
-AI-powered business intelligence platform that transforms natural language
-questions into SQL queries and dynamic visualizations.
+> Ever wished you could just ask your data questions like "show me sales by
+> region" and get instant charts? That's exactly what I built with DataViz Pro.
+> {{< video src="demo.mp4" >}}
 
-## Architecture & Technical Implementation
+## Why I Built This
 
-DataViz Pro is built as a **microservices architecture** with four core
-components:
+As someone diving deep into AI/ML, I kept seeing this recurring problem
+everywhere: people drowning in data but struggling to get answers. Everyone has
+spreadsheets and databases, but asking simple questions like "which products are
+trending?" requires either SQL skills or bothering the tech team.
 
-**🎯 Core Services:**
+I thought - what if we could just talk to our data, instead of figuring out what
+SQL entires to put in to get the desired output? So I decided to build upon
+something that lets you upload a CSV, ask questions in plain English, and get
+beautiful visualizations instantly. Plus, I wanted to learn and fimiliarise
+myself with LangGraph so that's that.
 
-- **React Frontend** (Port 3000): Modern UI with real-time streaming
-- **Python Backend** (Port 8123): LangGraph-powered AI agent using GPT-4/Gemini
-  LLM
-- **SQLite Server** (Port 3001): Database query execution and file management
-- **Conversation API** (Port 5000): Session management and chat history
+## How It Works
 
-**🧠 AI Agent Workflow:** The heart of the system is a **LangGraph workflow**
-that processes queries through multiple stages:
+The app has four main pieces working together:
 
-1. **Question Parsing**: Determines relevance and identifies target database
-   tables
-2. **Noun Extraction**: Finds unique values for context-aware query generation
-3. **SQL Generation**: Translates natural language to optimized SQL
-4. **Validation**: Checks and fixes SQL syntax/logic errors
-5. **Execution**: Runs queries against the database
-6. **Visualization Selection**: Chooses appropriate chart types (bar, line, pie,
-   scatter)
-7. **Data Formatting**: Structures results for frontend consumption
+**Frontend (Next.js/TypeScript)** - Clean interface where you can upload data
+and chat with it in real-time
 
-**🔄 Context-Aware Conversations:** Unlike simple chatbots, DataViz Pro
-maintains conversation context across multiple queries, enabling natural
-follow-up questions like "Show me sales by category" → "Now filter for
-electronics only" → "What about the top 5 products?"
+**AI Backend (Python + LangGraph)** - This is where the magic happens. It takes
+your question, figures out what data you need, writes the SQL, and decides what
+chart to show
 
-**🎨 Dynamic Visualization Engine:** The platform automatically selects and
-renders appropriate visualizations using AI-powered chart type selection based
-on data characteristics.
+**Database Server** - Handles all the SQL execution and file management
 
-**📊 Real-Time Streaming:** Built with Server-Sent Events (SSE) for live query
-processing, allowing users to watch the AI agent work through problems
-step-by-step.
+**Chat Manager** - Keeps track of your conversation so you can ask follow-up
+questions
 
-**🏢 Complex Business Schema:**
+When you ask something like "show me the top selling products," it goes through
+these steps:
 
-Created a comprehensive e-commerce database with **14 interconnected tables**:
+1. Understands what you're asking
+2. Looks at your data structure
+3. Writes the SQL query
+4. Checks if the query makes sense
+5. Runs it and gets results
+6. Picks the best chart type to display results
+7. Outputs answer in interactive layout
 
-- **Customer Management**: customers, addresses, loyalty tiers
-- **Product Catalog**: products, categories, suppliers, inventory
-- **Order Processing**: orders, order_items, payment methods
-- **Performance Analytics**: sales_performance, customer_reviews
-- **Business Intelligence**: website_analytics, promotions
+It also remembers context. You can ask "show me sales by month" then follow up
+with "now just Q4" and it knows what you mean.
 
-The platform handles complex business questions like "What are the top 5
-products by sales revenue?", "Show customer loyalty distribution", "Which
-employees exceeded their sales targets?", and "Compare monthly revenue trends".
+## The Tricky Parts
 
-## Challenges, Solutions & Lessons Learned
+Building this taught me that AI can be... temperamental. Getting the language
+model to understand vague questions like "show me interesting trends" was harder
+than I expected. Turns out prompt engineering is real?
 
-Key challenges included getting the AI to recognize exploratory questions as
-relevant (solved through refined system prompts), maintaining conversation
-context across microservices (solved with a dedicated conversation manager), and
-making technical SQL errors user-friendly (solved through multi-layer error
-handling with graceful degradation).
+The biggest headache was keeping conversations flowing. Imagine asking "show me
+sales" then "break that down by region" - the AI needs to remember what "that"
+refers to. I ended up building a conversation manager that tracks context
+between requests.
 
-## Technology Stack & Performance
+Also, SQL errors are cryptic. LLMs can generates bad SQL, I had to build an
+error checker so users get helpful messages instead of "syntax error at line 1."
 
-**Technology Stack:**
+## What I Used & What I Learned
 
-- **Frontend**: React/Next.js with real-time SSE updates, Tailwind CSS,
-  Chart.js/Recharts
-- **Backend**: Python with LangGraph, GPT-4/Gemini, raw SQL, Flask
-- **Infrastructure**: Docker containers, SQLite database, UUID-based file
-  management
+**Tech Stack:**
 
-**Performance Metrics:**
+- Next.js with TypeScript for the frontend - type safety is kinda nice
+- Tailwind + Material-UI for styling (MUI's charts are pretty solid)
+- Python + LangGraph for the AI flow (learning LangGraph and it's pretty neat)
+- React Flow for those interactive node diagrams you see in the workflow
+- GPT and Gemini as the language models
+- SQLite for now (keeping it simple, but PostgreSQL is on the roadmap)
 
-- Query Processing: Average 3-5 seconds from question to visualization
-- Conversation Context: Maintains last 3 turns for follow-up accuracy
-- Database Scale: Handles 14+ table schemas with complex relationships
-- Concurrent Users: Designed for multi-user session isolation
-- Visualization Types: 5+ chart types with intelligent auto-selection
+**Performance:** Most queries take 3-5 seconds, feels snappy enough. The app can
+handle multi-table databases and remembers the last few messages for context.
 
-**Key Lessons Learned:**
+**What I learned:**
 
-- Prompt engineering is critical for reliable LLM behavior
-- Context management transforms chatbots into conversation partners
-- Microservices enable scalability but require careful coordination
-- Real-time features significantly improve user experience
-- Natural language interfaces democratize data access
+- TypeScript is a nice - catching errors at compile time instead of runtime is
+  chef's kiss
+- Prompt engineering is important - tiny errors can flip AI result completely
+- Real-time streaming makes everything feel more alive and interactive
+- Material-UI's chart components are surprisingly powerful when you need quick,
+  clean visualizations
+- Building conversational AI is a token optimisation game
 
-## Getting Started & Usage
+## Want to Try It?
 
-**Prerequisites:** Node.js 20+, Python 3.11+, LangGraph Studio, API keys for
-OpenAI or Google Gemini
+You'll need Node.js 20+, Python 3.11+, and API keys for OpenAI or Google Gemini.
+Oh, and LangGraph Studio makes life way easier.
 
-**Quick Start:** The project includes a comprehensive service management script:
+**Quick Setup:**
 
 ```bash
-./manage_services.sh setup  # Creates environment files
-./manage_services.sh start  # Starts all services
+git clone https://github.com/shubhpsd/datavisualization_langgraph.git
+cd datavisualization_langgraph
+./manage_services.sh setup    # Creates all the environment files
 ```
 
-**Backend Options:** Choose between Python (recommended, uses Google
-Gemini/OpenAI) or TypeScript (uses OpenAI)
+Then you need to add your API keys to the environment files it creates. The
+setup script is pretty helpful - it'll create templates and tell you exactly
+what to edit.
 
-**Common Issues:** Port conflicts (check with `./manage_services.sh status`),
-environment setup (run `./manage_services.sh setup`), or file upload limits (1MB
-max for SQLite/CSV files)
+**Start Everything:**
 
-## Future Development
+```bash
+./manage_services.sh start    # Starts all services automatically
+```
 
-**Planned Features:** Multi-database support (PostgreSQL, MySQL), advanced
-analytics with statistical modeling, collaborative dashboards, API integrations,
-and React Native mobile app.
+This fires up:
 
-**Technical Roadmap:** Performance optimization through query caching, security
-enhancements with role-based access control, Kubernetes scalability, and
-fine-tuned domain-specific language models.
+- Frontend on localhost:3000
+- SQLite server on localhost:3001
+- Conversation API on localhost:5001
+- Plus you'll need to start the LangGraph backend (I recommend LangGraph Studio)
 
-## Conclusion
+**Pro tip:** The service management script is actually pretty useful - you can
+use `./manage_services.sh status` to check what's running,
+`./manage_services.sh logs` to debug issues, and `./manage_services.sh health`
+to make sure everything's working.
 
-DataViz Pro represents the future of business intelligence - where **domain
-expertise matters more than SQL skills**. By combining modern AI capabilities
-with thoughtful UX design, it transforms how organizations interact with their
+If stuff breaks (it happens), it's usually port conflicts or missing API keys.
+The script usually gives decent error messages to point you in the right
+direction.
+
+## What's Next
+
+Adding support for PostgreSQL and MySQL would be better (SQLite is great for
+demos but has limits). Also downloading/sharing features so teams can easily use
+the dashboards.
+
+## Wrapping Up
+
+This project taught me that the future of data analysis isn't about replacing
+analysts - it's about making data accessible to everyone. When you remove the
+SQL barrier, people ask way more interesting questions.
+
+Building DataViz Pro was my deep dive into conversational AI, and honestly, it
+got me even more excited about the possibilities. We're just scratching the
+surface of what's possible when you combine language models with structured
 data.
 
-The platform demonstrates that with the right architecture, AI can bridge the
-gap between complex data and actionable insights, making data-driven decision
-making accessible to everyone.
+If you're getting into AI/ML, I'd definitely recommend building something that
+combines multiple technologies.
 
-## Demo
-
-{{< video src="demo.mp4" >}}
-
-> See how easy it is to upload data, ask natural language questions, and get
-> beautiful visualizations powered by AI agents.
+As always you will learn more by doing that by watching.
 
 ---
 
@@ -174,13 +178,14 @@ making accessible to everyone.
 
 - [GitHub Repository](https://github.com/shubhpsd/data-viz)
 
-**🛠️ Built With:** React, Python, LangGraph, GPT-4/Gemini LLM, SQLite, Docker
+**🛠️ Built With:** Next.js, TypeScript, Python, LangGraph, Material-UI,
+GPT/Gemini
 
 **📦 Quick Start:**
 
 ```bash
-git clone https://github.com/shubhpsd/data-viz.git
-cd data-viz
+git clone https://github.com/shubhpsd/datavisualization_langgraph.git
+cd datavisualization_langgraph
 ./manage_services.sh setup
 ./manage_services.sh start
 ```

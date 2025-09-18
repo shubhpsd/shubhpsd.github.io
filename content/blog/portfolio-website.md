@@ -1,10 +1,10 @@
 ---
-title: "Building a Modern Portfolio Website with Hugo and Gruvbox Theme"
+title: "My Portfolio Website: Hugo, Gruvbox"
 date: 2025-01-28
 draft: false
 description:
-  "Creating a professional portfolio website using Hugo static site generator,
-  Gruvbox theme, JSON Resume integration, and optimized CSS architecture"
+  "Building a modern portfolio with Hugo and Gruvbox theme - because apparently
+  I enjoy making things harder than they need to be"
 tags:
   [
     "hugo",
@@ -19,166 +19,164 @@ tags:
 toc: true
 ---
 
-Building a professional developer portfolio requires balancing aesthetics,
-performance, and maintainability. This website represents my approach to
-creating a modern, fast, and content-focused portfolio using Hugo's static site
-generation power combined with the distinctive Gruvbox theme.
+You know that moment when you decide to build "just a simple portfolio website"
+and somehow end up with a fully-featured static site generator setup, custom CSS
+architecture, and automated deployment pipelines, with markdown blogging? Yeah,
+that's this project.
 
-## Design Philosophy {#design-philosophy}
+What started as "I need a website to showcase my projects" turned into a deep
+dive into Hugo templating, performance optimization, and way too many hours
+tweaking CSS variables. But hey, at least I learned a lot and now have a pretty
+neat portfolio that loads faster than most JavaScript frameworks can initialize.
 
-The foundation of this portfolio rests on several key principles:
+## Why Not Just Use a Dynamic Template?
 
-**Retro-Modern Aesthetic**: Utilizing the Gruvbox color scheme for a
-distinctive, high-contrast design that's both nostalgic and professional
+I wanted to understand every piece of my website. Plus, most portfolio templates
+felt either too generic or over-engineered and flashy with features I'd never
+use. I wanted something that was:
 
-**Performance-First**: Critical CSS inlining and optimized asset delivery for
-sub-second load times
+- **Fast to write content** - because nobody has time for to keep typing, so
+  markdown was the way
+- **Distinctive** - Gruvbox theme because it's easier to see and more retro
+- **Maintainable** - JSON Resume integration so I never have to manually update
+  my CV again
+- **Mine** - custom everything, down to the build process
 
-**Content-Centric**: Clean typography and layout that prioritizes readability
-and knowledge sharing
+## The Hugo Journey
 
-**Structured Data**: JSON Resume integration for maintainable and standardized
-professional information
+### Why Hugo Over Everything Else
 
-**Developer Experience**: Modern tooling with PostCSS, automated deployment, and
-comprehensive linting
+After wrestling with React, WordPress, and even considering hand-coding HTML
+(dark times), I landed on Hugo because:
 
-## Technology Stack
+**It's stupid fast**: Build times measured in milliseconds, not minutes. Coming
+from JavaScript land, this felt like cheating.
 
-### Hugo Static Site Generator
+**Go templates**: Once you get past the initial "what the hell is this syntax"
+phase, they're actually pretty powerful.
 
-**Why Hugo?**
-
-- **Speed**: Lightning-fast builds measured in milliseconds
-- **Flexibility**: Powerful templating system with Go templates
-- **Ecosystem**: Rich theme and module ecosystem
-- **SEO-Friendly**: Built-in support for sitemaps, robots.txt, and structured
-  data
-
-### Gruvbox Theme
-
-Chose the Gruvbox theme for its distinctive retro aesthetic and technical
-excellence:
+**No runtime**: Static files mean no server crashes at 3 AM nor lag on weaker
+browsers or extreme load times.
 
 ```toml
+# config/_default/hugo.toml
+# The magic numbers that make it all work
+baseURL = "https://shubhamprasad.me"
+languageCode = "en-us"
+title = "Shubham Prasad"
+theme = "gruvbox"
+```
+
+### Custom Domain Setup
+
+Since the site is now hosted at `shubhamprasad.me`, I set up a proper domain
+infrastructure:
+
+- **Domain**: Namecheap (better pricing than most)
+- **DNS**: Cloudflare (for subdomain management and my homelab projects)
+- **Hosting**: Still GitHub Pages, just with custom domain configured
+- **SSL**: Cloudflare handles certificates and CDN caching
+
+```toml
+# config/_default/hugo.toml
+baseURL = "https://shubhamprasad.me"
+languageCode = "en-us"
+title = "Shubham Prasad"
+theme = "gruvbox"
+
 [params]
-  # Aqua color scheme for a professional yet distinctive look
-  themeColor = "aqua"
+  themeColor = "aqua"  # Because blue is boring
   author = "Shubham Prasad"
   subtitle = "Finance and Machine Learning Enthusiast"
-  description = "Portfolio showcasing finance, machine learning, and technology projects"
-
-  [params.logo]
-    text = "shubhpsd.github.io"
-    url = "/"
 ```
 
-**Theme Features:**
+### Wrestling with Gruvbox Theme
 
-- High-contrast color palettes optimized for accessibility
-- Built-in dark/light mode support with system preference detection
-- Prism.js integration for syntax highlighting
-- Responsive design with mobile-first approach
+Found
+[Michael Schnerring's Hugo Gruvbox theme](https://github.com/schnerring/hugo-theme-gruvbox)
+and thought "this looks cool, should be easy to customize".
 
-## Site Architecture
+**Why This Theme Rocks:**
 
-### Content Structure
+The [Gruvbox theme](https://hugo-theme-gruvbox.schnerring.net/) comes with
+everything:
 
-```
-content/
-├── _index.md           # Homepage with personal introduction
-├── about.md            # Detailed bio and featured projects
-├── cv.md              # JSON Resume integration
-└── blog/
-    ├── _index.md       # Blog listing
-    ├── yoga-pose-detector/
-    ├── githubfetch/
-    ├── movie-recommendation-system/
-    └── portfolio-website.md
-```
+- **Prism code highlighting** with dark mode switching
+- **FlexSearch** for fast full-text search
+- **JSON Resume support** (game-changer for CV pages)
+- **Image optimization** with WebP and lazy loading
+- **Responsive design** that actually works on mobile
+- **Markdown blogging** - write posts, push to GitHub, done
 
-### Navigation Design
+**My Customizations:**
 
-Implemented a clean three-section navigation focusing on core content areas:
+- Critical CSS splitting for performance
+- Projects carousel (had to show off somehow)
+- Enhanced JSON Resume integration
+- Custom build pipeline with PostCSS
 
-```toml
-[menu]
-  [[menu.main]]
-    identifier = "blog"
-    name = "Blog"
-    url = "/blog"
-    weight = 10
-  [[menu.main]]
-    identifier = "cv"
-    name = "CV"
-    url = "/cv"
-    weight = 20
-  [[menu.main]]
-    identifier = "about"
-    name = "About"
-    url = "/about"
-    weight = 30
-```
+The retro aesthetic matched my ricing setup perfectly, and the blogging workflow
+is stupidly simple: write markdown, push to GitHub, site rebuilds automatically.
 
-## CSS Architecture & Performance
+The theme's retro aesthetic perfectly matched my terminal setup, and the high
+contrast made everything readable. Plus, it has both light and dark modes that
+actually don't hurt your eyes at 2 AM.
 
-### Critical/Non-Critical CSS Split
+## The CSS Architecture
 
-Implemented an advanced CSS architecture separating critical and non-critical
-styles:
+### Critical vs Non-Critical CSS
 
-```
+This is where things got interesting (read: unnecessarily complex). I
+implemented a system where critical CSS gets inlined in the `<head>` for
+above-the-fold content, while non-critical CSS loads asynchronously.
+
+```text
 assets/css/
-├── critical/           # Above-the-fold styles
-│   ├── 00-vendor.css  # Normalize.css and reset
+├── critical/           # The important stuff
+│   ├── 00-vendor.css  # Reset the browser's bad decisions
 │   ├── 15-colors.css  # Gruvbox color variables
-│   ├── 20-base.css    # Typography and base styles
-│   ├── 25-layout.css  # Grid and layout
-│   └── 30-header.css  # Navigation and header
-└── non-critical/      # Below-the-fold styles
-    ├── 15-footer.css  # Footer styles
-    └── 20-pagination.css # Pagination components
+│   ├── 20-base.css    # Typography that doesn't suck
+│   ├── 25-layout.css  # Make things not look broken
+│   └── 30-header.css  # Navigation magic
+└── non-critical/      # The nice-to-have stuff
+    ├── 15-footer.css
+    └── 20-pagination.css
 ```
 
-### Typography System
+**Did I need this level of optimization for a personal portfolio?** Absolutely
+not.  
+**Did I do it anyway?** Obviously.  
+**Was it worth the 6-hour CSS debugging session?** The 75/100 Lighthouse
+performance score says "mostly yes" (those project images are heavy!).
 
-Custom typography stack combining modern web fonts:
+### Typography That Actually Works
+
+Spent way too much time choosing fonts. Ended up with:
 
 ```css
 :root {
-  --font-monospace: "Fira Code", "Lucida Console", Monaco, monospace;
+  --font-monospace: "Fira Code", Monaco, monospace;
   --font-sans-serif: Verdana, Helvetica, sans-serif;
   --font-serif: "Roboto Slab", Georgia, serif;
 }
-
-html {
-  font-family: var(--font-serif);
-  font-size: 1rem;
-  scroll-behavior: smooth;
-}
 ```
 
-### Gruvbox Color Variables
+Fira Code for code blocks (because ligatures are life), Roboto Slab for headings
+(because it's readable), and Verdana for body text (because it works on
+everything).
 
-The theme's distinctive color palette provides excellent contrast and
-readability:
+## JSON Resume: Easy edits
 
-```css
-:root {
-  --bg: #fbf1c7; /* Light background */
-  --fg: #3c3836; /* Dark foreground */
-  --bg1: #ebdbb2; /* Subtle background */
-  --fg0: #282828; /* Strong foreground */
-  --aqua1: #689d6a; /* Primary accent */
-  --yellow1: #d79921; /* Warning/highlight */
-}
-```
+### The Problem with Traditional CVs
 
-## JSON Resume Integration
+You know what sucks? Having your resume in a Word doc that you have to manually
+update every time you change jobs, learn a new skill, or remember that project
+you forgot to mention.
 
-### Structured Professional Data
+### Enter JSON Resume
 
-Implemented JSON Resume standard for maintainable CV content:
+Found the JSON Resume standard and thought "this is it, this is the future." One
+JSON file to rule them all:
 
 ```json
 {
@@ -187,170 +185,125 @@ Implemented JSON Resume standard for maintainable CV content:
     "name": "Shubham Prasad",
     "label": "Finance and Tech Enthusiast",
     "email": "shubhampsd@tuta.io",
-    "summary": "Currently pursuing Post Graduate Diploma in Statistical Methods and Analytics...",
-    "location": {
-      "city": "Delhi",
-      "country": "India"
-    }
+    "summary": "Currently pursuing Post Graduate Diploma in Statistical Methods and Analytics..."
   },
-  "work": [...],
-  "education": [...],
-  "skills": [...],
-  "projects": [...]
+  "work": [
+    {
+      "name": "Previous Company",
+      "position": "Data Analyst",
+      "startDate": "2023-01-01",
+      "summary": "Did data things, made charts"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Python",
+      "level": "Advanced",
+      "keywords": ["pandas", "scikit-learn", "matplotlib"]
+    }
+  ]
 }
 ```
 
-### Shortcode Integration
-
-Created reusable shortcodes for dynamic content rendering:
-
-```html
-<!-- layouts/shortcodes/json-resume.html -->
-{{ $section := .Get 0 }} {{ $lang := .Page.Language.Lang }} {{ $data := index
-.Site.Data.json_resume $lang }} {{ partial (printf "json-resume/%s.html"
-$section) $data }}
-```
-
-**Usage in Markdown:**
+Then created Hugo shortcodes to render different sections:
 
 ```markdown
 ## Experience
 
-{{< json-resume "work" >}}
+{{</* json-resume "work" */>}}
 
 ## Education
 
-{{< json-resume "education" >}}
+{{</* json-resume "education" */>}}
+
+## Skills
+
+{{</* json-resume "skills" */>}}
 ```
 
-## Build Process & Tooling
+**Result**: Update one JSON file, and it automatically updates everywhere. My CV
+page and any future integrations all stay in sync. It's beautiful.
+
+## Build Process: Making Simple Things Complex
 
 ### PostCSS Pipeline
 
-Modern CSS processing with performance optimizations:
+Because apparently using regular CSS is for peasants, the theme had a PostCSS
+pipeline:
 
 ```js
 // postcss.config.js
 module.exports = {
   plugins: [
-    require("postcss-import"),
-    require("postcss-custom-media"),
-    require("postcss-nesting"),
-    require("postcss-preset-env"),
+    require("postcss-import"), // Import other CSS files
+    require("postcss-nesting"), // Nest CSS like Sass
+    require("postcss-preset-env"), // Use future CSS today
     require("cssnano")({
+      // Make CSS tiny
       preset: "default",
     }),
     require("@fullhuman/postcss-purgecss")({
+      // Remove unused CSS
       content: ["./layouts/**/*.html", "./hugo_stats.json"],
-      defaultExtractor: (content) => content.match(/[\w-/:]+(?<!:)/g) || [],
     }),
   ],
 };
 ```
 
-### Dependencies & Asset Management
+**Translation**: Take perfectly good CSS, run it through 6 different processors,
+and spit out optimized CSS that's smaller than the original and renders 10x
+faster. Modern web development in a nutshell.
 
-```json
-{
-  "dependencies": {
-    "@tabler/icons": "^3.31.0",
-    "flexsearch": "0.7.43",
-    "normalize.css": "^8.0.1",
-    "prism-themes": "^1.9.0",
-    "prismjs": "^1.29.0",
-    "simple-icons": "^13.7.0",
-    "typeface-fira-code": "^1.1.13",
-    "typeface-roboto-slab": "^1.1.13"
-  }
-}
-```
+### Automated Deployment
 
-### Linting & Code Quality
-
-Comprehensive linting setup for maintainable code:
-
-```json
-{
-  "scripts": {
-    "lint": "npm run lint:css && npm run lint:js && npm run lint:md",
-    "lint:css": "stylelint --fix **/*.css",
-    "lint:js": "eslint --fix .",
-    "lint:md": "markdownlint --fix **/*.md"
-  }
-}
-```
-
-## Deployment Pipeline
-
-### GitHub Actions Workflow
-
-Automated deployment with optimized build process:
+Set up GitHub Actions to automatically deploy when I push to main:
 
 ```yaml
+# .github/workflows/hugo.yml
 name: Deploy Hugo site to Pages
 
 on:
   push:
     branches: ["main"]
-  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      HUGO_VERSION: 0.147.8
     steps:
       - name: Install Hugo CLI
         run: |
-          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
+          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb
           && sudo dpkg -i ${{ runner.temp }}/hugo.deb
 
-      - name: Install Dart Sass
-        run: sudo snap install dart-sass
-
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-
-      - name: Install Node.js dependencies
-        run: "[[ -f package-lock.json ]] && npm ci || true"
-
       - name: Build with Hugo
-        env:
-          HUGO_ENVIRONMENT: production
         run: hugo --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
 ```
 
-### Build Optimizations
+Now I can write a blog post, push to GitHub, and have it live in under 2
+minutes. Future me will thank present me for this automation.
 
-- **Hugo Extended**: WebP image processing and advanced features
-- **Dart Sass**: Latest Sass compilation
-- **Asset Minification**: Automatic CSS/JS/HTML minification
-- **PurgeCSS**: Remove unused CSS for optimal bundle size
+## Performance: Because Speed Matters
 
-## Performance Optimizations
+### Lighthouse Scores That Don't Suck
 
-### Critical CSS Inlining
+Current performance metrics from PageSpeed Insights:
 
-The theme automatically inlines critical CSS for above-the-fold content:
+- **Performance**: 75/100 (room for improvement, but solid)
+- **Accessibility**: 96/100 (almost perfect)
+- **Best Practices**: 96/100 (excellent)
+- **SEO**: 100/100 (Google loves me)
 
-```html
-<!-- layouts/partials/head/stylesheets.html -->
-{{ if .Site.IsServer }}
-<!-- Development: separate files for debugging -->
-<link rel="stylesheet" href="/css/critical.css" />
-{{ else }}
-<!-- Production: inline critical CSS -->
-<style>
-  {{ readFile "public/css/critical.css" | safeCSS }}
-</style>
-{{ end }}
-```
+**Performance opportunities identified**:
 
-### Image Processing
+- Image delivery optimization (potential 9.5MB savings)
+- Better cache lifetimes (potential 6.7MB savings)
+- Reduce network payload size (currently 9.9MB)
 
-Hugo's built-in image processing for responsive images:
+Not bad for a portfolio site packed with project images!
+
+### Image Optimization
+
+Hugo's built-in image processing is criminally underrated:
 
 ```html
 {{ $image := .Page.Resources.GetMatch "featured-image.*" }} {{ if $image }} {{
@@ -363,212 +316,80 @@ q80" }}
 {{ end }}
 ```
 
-### Lighthouse Performance Scores
+Automatically converts images to WebP for modern browsers, with fallbacks for
+older ones. Plus lazy loading because we're not savages.
 
-Current performance metrics:
+## Things I Learned (The Hard Way)
 
-- **Performance**: 98/100
-- **Accessibility**: 100/100
-- **Best Practices**: 95/100
-- **SEO**: 100/100
+### 1. Hugo's Learning Curve is Real
 
-## Content Strategy
+Go templates look like someone took HTML and put it in a blender with
+programming syntax. Things like `{{ range .Site.RegularPages }}` and
+`{{ with .Params.author }}` make sense... eventually.
 
-### Blog-First Approach
+**Pro tip**: The Hugo documentation is actually good and easy to understand. For
+other things LLMs are your friend.
 
-Transformed from a traditional portfolio to a knowledge-sharing platform:
+### 2. CSS Optimization Can Be Addictive
 
-```markdown
----
-title: Hello, I'm Shubham 👋
----
+Started with "let me just inline some critical CSS" and ended up with a full
+build pipeline that optimizes, minifies, and purges unused styles.
 
-This is the place where I share my thoughts and notes about things that I'm
-excited about and working on and hope to connect with people having a similar
-mindset. I'd love to hear from you!
+**Lesson**: Sometimes good enough is actually good enough. But sometimes you
+need that extra 0.1 second page load improvement.
 
-Check out my latest blog posts below.
-```
+### 3. JSON Resume is Brilliant
 
-### Technical Writing
+Having your professional information in a standardized format opens up so many
+possibilities:
 
-Each blog post includes:
+- Auto-generate different CV formats
+- Integrate with job application systems
+- Keep everything in version control
+- Never manually copy-paste experience descriptions again
 
-- **Comprehensive project documentation** with architecture details
-- **Code examples** with syntax highlighting
-- **Performance metrics** and optimization techniques
-- **Lessons learned** and technical challenges
+### 4. Static Sites Are Underrated
 
-## Advanced Features
+After years of seeing database crashes, lag spikes, bad load times, serving
+static files feels like cheating. It's fast, secure, and basically
+indestructible.
 
-### Search Functionality
+## What I'd Do Differently
 
-Integrated FlexSearch for fast client-side search:
+**More content, less optimization**: Spent too much time tweaking performance
+and not enough time writing. The content is what people actually care about.
 
-```html
-<!-- layouts/home.searchindex.json -->
-{{- $index := slice -}} {{- range .Site.RegularPages -}} {{- $index = $index |
-append (dict "id" .Permalink "title" .Title "content" (.Plain | truncate 200)
-"tags" .Params.tags ) -}} {{- end -}} {{- $index | jsonify -}}
-```
+**Better image workflow**: Need to set up automated image optimization and
+proper alt-text workflows.
 
-### Social Sharing
+## Future Plans
 
-Built-in social sharing with configurable platforms:
+**Domain Infrastructure**: The Cloudflare setup isn't just for this site - I'm
+planning to use subdomains for various homelab projects and self-hosted
+services. Expect a detailed blog post about my server setup, Docker containers,
+and whatever other self-hosting shenanigans I get into.
 
-```toml
-[[params.socialShare]]
-  iconSuite = "simple-icon"
-  iconName = "linkedin"
-  formatString = "https://www.linkedin.com/sharing/share-offsite/?url={url}"
-```
+**Comments**: Utterances for blog discussions  
+**Analytics**: Something privacy-friendly to see if anyone actually reads this
 
-### Code Highlighting
+## The Real Results
 
-Advanced Prism.js configuration with multiple plugins:
+**Professional presence**: A website that actually represents my skills and
+interests  
+**Learning platform**: Documented every project so I remember what I built  
+**Performance obsession**: Sub-second load times because life's too short for
+slow websites  
+**Future-proof**: Easy to maintain and extend as my career evolves
 
-```toml
-[params.prism]
-  languages = [
-    "markup", "css", "javascript", "python",
-    "bash", "diff", "toml", "json"
-  ]
-  plugins = [
-    "normalize-whitespace",
-    "toolbar",
-    "copy-to-clipboard",
-    "line-numbers",
-    "command-line"
-  ]
-```
+Would I recommend this approach? If you enjoy learning web technologies and want
+complete control over your online presence, absolutely. If you just want a quick
+portfolio, maybe stick with a template.
 
-## Development Workflow
-
-### Local Development
-
-```bash
-# Clone repository
-git clone https://github.com/shubhpsd/shubhpsd.github.io.git
-cd shubhpsd.github.io
-
-# Install dependencies
-npm install
-
-# Start development server
-hugo server -D --disableFastRender
-
-# Build for production
-npm run lint && hugo --minify
-```
-
-### Content Creation Workflow
-
-1. **Create content**: Write Markdown files with frontmatter
-2. **Update JSON Resume**: Modify structured data for CV sections
-3. **Lint and format**: Run automated code quality checks
-4. **Preview locally**: Test with development server
-5. **Deploy**: Push to main branch for automatic deployment
-
-## Maintenance & Updates
-
-### Dependency Management
-
-Using Renovate for automated dependency updates:
-
-```json
-{
-  "extends": ["config:base"],
-  "packageRules": [
-    {
-      "matchDepTypes": ["devDependencies"],
-      "automerge": true
-    }
-  ]
-}
-```
-
-### Content Updates
-
-Regular maintenance tasks:
-
-- **JSON Resume updates**: Keep professional information current
-- **Blog content**: Document new projects and learnings
-- **Performance monitoring**: Track Core Web Vitals
-- **Security updates**: Automated dependency updates
-
-## Results & Impact
-
-**Professional Presence**: Clean, distinctive website showcasing technical
-capabilities
-
-**Knowledge Platform**: Centralized location for documenting projects and
-insights
-
-**Performance Excellence**: Sub-second load times with 98/100 Lighthouse score
-
-**Developer Experience**: Modern tooling and automated workflows
-
-**SEO Optimization**: Perfect SEO score with structured data
-
-## Technical Skills Developed
-
-**Hugo Mastery**: Advanced templating, shortcodes, and build optimization
-
-**CSS Architecture**: Critical CSS patterns and performance optimization
-
-**JSON Schema**: Structured data implementation with JSON Resume
-
-**Build Automation**: GitHub Actions, PostCSS, and asset optimization
-
-**Performance Optimization**: Web Vitals, image processing, and bundle
-optimization
-
-## Challenges & Solutions
-
-### 1. CSS Performance Optimization
-
-**Challenge**: Balancing design richness with loading performance **Solution**:
-Critical/non-critical CSS splitting with automated inlining
-
-### 2. JSON Resume Integration
-
-**Challenge**: Making structured resume data editable and maintainable
-**Solution**: Hugo shortcodes with JSON schema validation
-
-### 3. Build Process Complexity
-
-**Challenge**: Managing multiple build tools and dependencies **Solution**:
-Comprehensive npm scripts and GitHub Actions automation
-
-### 4. Theme Customization
-
-**Challenge**: Extending Gruvbox theme without breaking updates **Solution**:
-Strategic CSS overrides and custom layout partials
-
-## Future Enhancements
-
-**Planned Features:**
-
-- **Comments System**: Utterances integration for blog discussions
-- **Newsletter**: RSS feed improvements and email subscriptions
-- **Project Galleries**: Enhanced visual project showcases
-- **Analytics Dashboard**: Custom visitor insights and metrics
-
-**Technical Improvements:**
-
-- **Progressive Web App**: Service worker for offline capabilities
-- **Advanced Search**: Full-text search with filtering
-- **Performance Monitoring**: Real User Monitoring (RUM)
-- **Content Management**: Headless CMS integration for non-technical updates
-
-This portfolio represents a modern approach to developer websites, combining
-aesthetic appeal with technical excellence and optimal performance.
+But where's the fun in that?
 
 ---
 
-**Technologies Used**: Hugo, Gruvbox Theme, GitHub Pages, GitHub Actions,
-PostCSS, JSON Resume, Prism.js, FlexSearch
+**Built with**: Hugo, Gruvbox Theme, GitHub Pages and too much caffeine
 
-**Live Site**: [shubhpsd.github.io](https://shubhpsd.github.io)  
-**Source Code**:
-[GitHub Repository](https://github.com/shubhpsd/shubhpsd.github.io)
+**Live site**: [shubhamprasad.me](https://shubhamprasad.me)  
+**Source code**: [GitHub](https://github.com/shubhpsd/shubhpsd.github.io)
