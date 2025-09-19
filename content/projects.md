@@ -3,9 +3,11 @@ title: "Projects"
 description:
   "Showcase of things I've built - from data viz tools to homelab server"
 projects:
-  - "movie-recommendation-system"
-  - "yoga-pose-detector"
+  - "data-viz"
   - "githubfetch"
+  - "yoga-pose-detector"
+  - "movie-recommendation-system"
+  
 ---
 
 A showcase of the stuff I've built, learned from, and probably spent way too
