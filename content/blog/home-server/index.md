@@ -1,395 +1,478 @@
 ---
-title: "Building a Self-Hosted Home Server Infrastructure"
-date: 2025-05-23
+title: "Building My Home Server: From B.Com to Self-Hosted Everything"
+date: 2025-09-19
 draft: false
 description:
-  "Setting up a complete self-hosted infrastructure with media streaming, cloud
-  storage, and global access using Docker and Tailscale"
+  "How I built a complete home server setup with Proxmox VE on a Dell OptiPlex
+  3060, running 20+ services including Nextcloud, Jellyfin, and more. A journey
+  from commerce background to self-hosting enthusiast."
 tags:
   [
+    "homelab",
+    "proxmox",
     "self-hosting",
+    "privacy",
     "docker",
-    "linux",
-    "infrastructure",
-    "jellyfin",
-    "nextcloud",
-    "immich",
+    "networking",
+    "cloudflare",
     "tailscale",
+    "wireguard",
   ]
+categories: ["Technical", "Projects"]
 toc: true
 cover:
-  src: ./server-cover.jpg
-  alt: "Home server setup with Dell G5 5587 laptop running Docker containers for self-hosted services"
+  src: ./server.jpg
+  alt:
+    "Dell OptiPlex 3060 Micro running Proxmox VE with 20+ self-hosted services"
 ---
 
-In an era where data privacy and ownership are becoming increasingly important,
-I decided to build my own self-hosted infrastructure. This project resulted in a
-complete home server setup using a repurposed Dell G5 5587 gaming laptop with
-2TB RAID storage, featuring multiple services accessible globally through
-Tailscale.
+What started as a simple desire for digital privacy has evolved into a
+comprehensive home server setup that handles everything from file storage to
+media streaming, password management to DNS filtering. This is how me, a B.Com
+background dove deep into the world of self-hosting on a budget and will help
+guide you too.
+
+In this post, I'll take you through my entire home server journey. From the
+hardware choices and software setup to the networking challenges and service
+configs. So, Whether you're a privacy first guy or a tech nerd on the hobby
+side, wanting to learn about self-hosting, this guide has something for you.
+
+## My Journey: From Commerce to Code
+
+### The Privacy Awakening
+
+My transition into the tech world wasn't traditional. With a background in
+B.Com, I initially had little interest in technology beyond basic usage.
+However, my love for youtube, and Linus' channel and tech trends gradually drew
+me into the world of self-hosting.
+
+It was with a Louis Rossman video that I realized how much personal data was
+being collected and monetized, how many rights to repair were not being honored
+and just monopoly stuff was happening by large corporations. So I got into this
+new interest in taking control of my digital data, media, music and whatnot,
+which eventually led me down the homelab side of the internet.
+
+### Learning Through Building
+
+What started as a simple desire to host my own cloud storage quickly snowballed
+into a comprehensive infrastructure project. Each service I wanted to self-host
+taught me something new:
+
+- **File Storage**: Led me to learn about RAID, proxies, backups, and network
+  protocols
+- **Media Streaming**: Introduced me to transcoding, codecs, and bandwidth
+  management
+- **Password Management**: Taught me about security, encryption, and access
+  control
+- **DNS Filtering and Port forwarding**: Opened up networking concepts and
+  traffic analysis
 
 ## Why Self-Host?
 
-**Data Ownership**: Complete control over my personal data and media
+**Data Ownership**: Complete control and ownership of my personal data and
+media  
 **Privacy**: No third-party services scanning or monetizing my content  
-**Cost Savings**: Eliminate monthly subscriptions for cloud services **Learning
-Experience**: Deep dive into infrastructure, networking, and system
-administration **Customization**: Tailor services exactly to my needs
+**Cost Savings**: Get rid of monthly subscriptions and eventually overtime
+surpass the costs in a +ve balance  
+**Learning Experience**: Deep dive into infrastructure, networking, and system
+administration  
+**Customization**: Tailor services exactly to my wants and needs I guess?
 
-## Hardware Setup
+## Hardware Foundation: Dell OptiPlex 3060 Micro
 
-I repurposed a gaming laptop into a capable home server, providing excellent
-performance while saving on dedicated server hardware costs.
+### Why This Business-Grade Mini PC?
+
+After going through endless reddit threads,
+[r/homelab](https://www.reddit.com/r/homelab/) and
+[r/selfhosted](https://www.reddit.com/r/selfhosted/), talking to people on their
+discord servers and then cost optimising, I settled on a **Dell OptiPlex 3060
+MT** as my server foundation. Here's why this business PC made somehwat of a
+compelling option for a 24/7 homelab:
 
 ### Server Specifications
 
-- **Device**: Repurposed Dell G5 5587 gaming laptop
-- **CPU**: Intel i7-8750H (6 cores, 12 threads)
-- **GPU**: Nvidia GTX 1050ti (used for hardware transcoding)
-- **RAM**: 16GB DDR4
-- **Storage**: 2TB RAID 1 configuration for redundancy
-- **OS**: Fedora Server Edition
+- **Device**: Dell OptiPlex 3060 MT (used business PC)
+- **CPU**: Intel Core i3-8100T (4 cores, 3.1GHz, 35W TDP)
+- **RAM**: 16GB DDR4 (upgraded from 8GB)
+- **Storage**: 512GB NVMe SSD + 1.5TB Internal HDDs
 - **Network**: Gigabit Ethernet with static IP
-- **Power Management**: Custom cooling stand with additional fans
+- **Power**: 20-25W idle, 35-40W under load
+- **OS**: Proxmox
 
-### RAID Configuration
+### Hardware Advantages
 
-```bash
-# Setting up RAID 1 for data redundancy
-sudo mdadm --create --verbose /dev/md0 --level=1 --raid-devices=2 /dev/sdb /dev/sdc
+**Power Efficiency**: Important to consider for 24/7 use and optimise for low
+electricity costs  
+**Silent Operation**: Minimal noise and enough cooling in most scenarios,
+perfect for home use  
+**Business Grade**: Reliable components designed for continuous operation for
+professional use  
+**Upgrade Path**: CPU upgradable to Intel i9 9th Gen, RAM expandable to 32GB and
+3 SATA ports  
+**Cost Effective**: Cheapest beginner gear for my homelab goals
 
-# Create filesystem
-sudo mkfs.ext4 /dev/md0
+### Storage Strategy
 
-# Mount and configure auto-mount
-sudo mkdir /mnt/raid1
-echo '/dev/md0 /mnt/raid1 ext4 defaults,nofail,discard 0 0' | sudo tee -a /etc/fstab
-```
+The current setup uses:
 
-## Service Architecture
+- **NVMe SSD**: Host OS (Proxmox) and container storage
+- **External HDD**: Media files, backups, and bulk data
+- **Future Plans**: Get 3 4TB Red NAS Drives, to run in Raid Z1, so I can have 1
+  drive worth of parity and have 8TB usable storage
 
-### Docker-First Approach
+## Software Foundation: Proxmox
 
-All services run in Docker containers for easy management, updates, and
-isolation:
+After evaluating various options, I chose **Proxmox** as my virtualization
+platform. This hypervisor provides the perfect power and simplicity for this
+purpose.
 
-```yaml
-version: "3.8"
+![Proxmox Dashboard](./proxmox-dashboard.png) _My Proxmox dashboard showing all
+containers and VMs with overall usage_
 
-services:
-  jellyfin:
-    image: jellyfin/jellyfin:latest
-    container_name: jellyfin
-    volumes:
-      - /mnt/raid1/jellyfin/config:/config
-      - /mnt/raid1/jellyfin/cache:/cache
-      - /mnt/raid1/media:/media
-    ports:
-      - "8096:8096"
-    restart: unless-stopped
+### Why Proxmox?
 
-  nextcloud:
-    image: nextcloud:latest
-    container_name: nextcloud
-    volumes:
-      - /mnt/raid1/nextcloud:/var/www/html
-    environment:
-      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
-      - MYSQL_DATABASE=nextcloud
-      - MYSQL_USER=nextcloud
-      - MYSQL_HOST=db
-    ports:
-      - "8080:80"
-    restart: unless-stopped
+**Professional Grade**: Enterprise virtualization with web management  
+**Resource Efficient**: LXC containers use less resources than VMs  
+**Backup Integration**: Built-in snapshot and backup capabilities  
+**Learning Value**: Exposure to enterprise-level concepts  
+**Community Support**: Excellent documentation and ofcourse YouTube guides
 
-  immich-server:
-    image: ghcr.io/immich-app/immich-server:release
-    container_name: immich_server
-    volumes:
-      - /mnt/raid1/immich/upload:/usr/src/app/upload
-    environment:
-      - DB_HOSTNAME=immich-postgres
-      - DB_USERNAME=postgres
-      - DB_PASSWORD=${DB_PASSWORD}
-      - DB_DATABASE_NAME=immich
-    ports:
-      - "2283:3001"
-    restart: unless-stopped
-```
+### Container Strategy
 
-## Core Services
+I run most services in **LXC containers** rather than VMs for better resource
+efficiency. Each class of services gets its LXC with dedicated CPU, memory, and
+storage allocations.
 
-### 1. Jellyfin - Media Streaming
+Here's my config files for the same to help you:  
+**📋 [Complete Proxmox Setup Guide](https://github.com/shubhpsd/homelab-configs/tree/main/proxmox)**
 
-**Purpose**: Netflix-like interface for personal media collection **Features**:
+## Ecosystem Overview
 
-- Hardware transcoding for multiple device support
-- Mobile apps for iOS/Android
-- User management with parental controls
-- Subtitle support and metadata fetching
+My home server runs **20+ services** across 7 organized LXCs/VMs, all managed
+through a quickly overviewed from my Homepage dashboard. Here's a look at the
+dashboard:
 
-```bash
-# Hardware transcoding setup for Intel QuickSync
-sudo usermod -a -G render jellyfin
-sudo chown -R jellyfin:jellyfin /dev/dri
-```
+![Homepage Dashboard](./homepage-dashboard.png) _Homepage dashboard organized by
+category with real-time monitoring, also visible at
+[dash.shubhamprasad.me](https://dash.shubhamprasad.me/)_
 
-### 2. Nextcloud - Cloud Storage
+### Categories
 
-**Purpose**: Google Drive/iCloud replacement **Features**:
+**Core Services**: Proxmox, monitoring, and Samba share  
+**Cloud Storage**: Nextcloud (personal cloud) and Immich (photo backup)  
+**Networking**: Pi-hole (ad blocking), VPN, speedtest and proxy management  
+**Media Platform**: Jellyfin (movies/TV), Jellyseerr (show requests), Navidrome
+(music), and Jellystat (watch stats)  
+**Media Automation**: Complete \*arr stack for automated content management  
+**Download Management**: qBittorrent, indexers, and specialized downloaders
 
-- File synchronization across devices
-- Calendar and contacts sync
-- Document collaboration
-- Photo backup from mobile devices
+Each service includes custom widgets showing real-time stats like storage usage,
+active users, download progress, and system health.
 
-**Custom Configuration**:
+Please refer to my config to get an idea and setup your own version:  
+**📋 [Complete Homepage Configuration](https://github.com/shubhpsd/homelab-configs/tree/main/homepage)**
 
-```php
-// config.php customizations
-'memcache.local' => '\OC\Memcache\APCu',
-'memcache.redis' => [
-    'host' => 'redis',
-    'port' => 6379,
-],
-'default_phone_region' => 'IN',
-'trusted_domains' => [
-    'nextcloud.local',
-    '192.168.1.100',
-],
-```
+## Monitoring: Keeping Everything Running
 
-### 3. Immich - Photo Management
+With 20+ services running, monitoring is crucial. I've used beszel for
+monitoring that gives me complete visibility into system health and performance
+aesthetically.
 
-**Purpose**: Google Photos alternative with AI features **Features**:
+![Beszel Dashboard](./beszel-1.png) ![Beszel Dashboard](./beszel-2.png) _Beszel
+dashboard showing real-time system metrics and container resource usage_
 
-- Automatic photo backup from mobile
-- Face recognition and object detection
-- Timeline view and smart albums
-- Shared albums for family
+### System Monitoring with Beszel
 
-### 4. Additional Services
+**Beszel** provides lightweight, beautiful system monitoring without the
+complexity of Prometheus/Grafana. It tracks:
 
-**Portainer**: Docker container management GUI
+- **System Resources**: CPU, memory, disk usage, and network statistics
+- **Container Metrics**: Individual Docker container resource consumption
+- **Historical Data**: Performance trends and resource usage over time
+- **Alert System**: Notifications when services exceed thresholds
 
-```yaml
-portainer:
-  image: portainer/portainer-ce:latest
-  container_name: portainer
-  volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
-    - portainer_data:/data
-  ports:
-    - "9000:9000"
-```
+Both tools are documented in my monitoring configuration:  
+**📋 [Complete Monitoring Setup](https://github.com/shubhpsd/homelab-configs/tree/main/monitoring)**
 
-**Nginx Proxy Manager**: Reverse proxy with SSL
+## Networking: Getting over CGNAT
 
-```yaml
-nginx-proxy-manager:
-  image: jc21/nginx-proxy-manager:latest
-  container_name: nginx-proxy-manager
-  ports:
-    - "80:80"
-    - "443:443"
-    - "81:81"
-  volumes:
-    - ./data:/data
-    - ./letsencrypt:/etc/letsencrypt
-```
+### The Problem: CGNAT Limitations
 
-## Global Access with Tailscale
+My biggest challenge? **Carrier-Grade NAT (CGNAT)** from my ISP, Airtel and I
+talked around, and mostly every ISP in India does the same. No public IP, no
+port forwarding, no easy way to access my server from outside. It felt
+frustrating man.
 
-### Why Tailscale?
+But every problem has a solution...
 
-- **Zero-config VPN**: No complex networking setup
-- **End-to-end encryption**: Secure access from anywhere
-- **Multi-platform**: Works on all devices
-- **No port forwarding**: Bypass router configurations
+### The Game Changer: Cloudflare Tunnels
 
-### Setup Process
+Cloudflare Tunnels became my solution. They create secure connections between my
+server and the internet without exposing my home IP or requiring any router
+configuration.
 
-```bash
-# Install Tailscale on Ubuntu Server
-curl -fsSL https://tailscale.com/install.sh | sh
+![Network Architecture](network-diagram.png)
 
-# Authenticate and connect
-sudo tailscale up
+**Network Traffic Flow:**
 
-# Enable subnet routing for local network access
-sudo tailscale up --advertise-routes=192.168.1.0/24
-```
+**How it works:**
 
-### Device Configuration
+1. **External Request**: User visits `jellyfin.shubhamprasad.me`
+2. **Cloudflare CDN**: Routes traffic through their global network
+3. **Home Network**: Cloudflare tunnel connects to my home router
+4. **Tunnel LXC**: Cloudflare daemon running in dedicated container
+   (192.168.1.x)
+5. **Nginx Proxy Manager**: Receives traffic from tunnel, handles SSL/routing
+6. **Pi-hole DNS**: All internal DNS queries go through Pi-hole for ad blocking
+7. **Target Service**: Traffic reaches Jellyfin, Nextcloud, etc. on their local
+   IPs
 
-Each device (laptop, phone, tablet) connects to the Tailscale network, providing
-seamless access to all services using their Tailscale IPs.
+**The solution:** A simple Docker stack with Nginx Proxy Manager and Cloudflare
+Tunnels that handles all the complexity behind the scenes.
 
-## Monitoring and Maintenance
+**What this setup provides:**
 
-### System Monitoring
+- **SSL Certificate Management**: Automatic Let's Encrypt certificates for all
+  services
+- **Reverse Proxy Power**: Routes for example, `dash.shubhamprasad.me` to my
+  Homepage dashboard
+- **Zero Trust Security**: No open ports on my router
+- **Global Performance**: CDN acceleration from Cloudflare's worldwide network
 
-```yaml
-prometheus:
-  image: prom/prometheus:latest
-  container_name: prometheus
-  volumes:
-    - ./prometheus.yml:/etc/prometheus/prometheus.yml
-  ports:
-    - "9090:9090"
+### DNS Filtering: Pi-hole + Unbound
 
-grafana:
-  image: grafana/grafana:latest
-  container_name: grafana
-  volumes:
-    - grafana-storage:/var/lib/grafana
-  ports:
-    - "3000:3000"
-```
+Network-wide ad blocking that makes every device on my network browsing
+experience faster and more private.
 
-### Automated Backups
+![Pi-hole Dashboard](pihole-dashboard.png)
 
-```bash
-#!/bin/bash
-# Daily backup script
-DATE=$(date +%Y%m%d)
-BACKUP_DIR="/mnt/raid1/backups"
+**My current blocking performance:**
 
-# Backup Docker volumes
-docker run --rm -v nextcloud_data:/data -v $BACKUP_DIR:/backup ubuntu tar czf /backup/nextcloud_$DATE.tar.gz -C /data .
+- **~30% of DNS queries blocked** daily (that's a lot of ads!)
+- **600,000+ domains** on my blocklist
+- **Sub-10ms query response** times
+- **DNSSEC validation** with Unbound for enhanced security
 
-# Backup databases
-docker exec mysql mysqldump -u root -p$MYSQL_ROOT_PASSWORD --all-databases | gzip > $BACKUP_DIR/mysql_$DATE.sql.gz
+### Remote Access: Tailscale/Wireguard VPN
 
-# Clean old backups (keep last 7 days)
-find $BACKUP_DIR -name "*.tar.gz" -mtime +7 -delete
-```
+When I'm away from home, Tailscale/Wireguard creates a private mesh network that
+allows my network to assume I'm sitting right at my home desk.
 
-## Security Measures
+**What I can do remotely:**
 
-### 1. Firewall Configuration
+- SSH into any server part
+- Administer my servers from my phone
+- Control home automation while traveling
 
-```bash
-# UFW rules for external access
-sudo ufw default deny incoming
-sudo ufw default allow outgoing
-sudo ufw allow ssh
-sudo ufw allow 41641/udp  # Tailscale
-sudo ufw enable
-```
+### The Results Speak for Themselves
 
-### 2. SSL Certificates
+**Performance Metrics:**
 
-All services secured with Let's Encrypt certificates via Nginx Proxy Manager:
+- **Uptime**: 99.9% (better than many paid services!)
+- **Load Times**: Faster than most hosted alternatives
+- **Security**: Zero failed intrusion attempts
+- **Cost**: $0/month just a one time time and effort cost
 
-- `jellyfin.mydomain.com`
-- `nextcloud.mydomain.com`
-- `immich.mydomain.com`
+**Service Access Points:**
 
-### 3. Regular Updates
+- `dash.shubhamprasad.me` → Homepage Dashboard
+- `nextcloud.shubhamprasad.me` → Cloud Storage
+- `photos.shubhamprasad.me` → Photo Management
+- `jellyfin.shubhamprasad.me` → Media Streaming
+- `jellyseerr.shubhamprasad.me` → Requesting downloads of shows/movies
+- `music.shubhamprasad.me` → Music Server
+- `speedtest.shubhamprasad.me` → Home network speedtest
 
-```bash
-#!/bin/bash
-# Update script
-docker-compose pull
-docker-compose up -d
-docker system prune -f
-sudo apt update && sudo apt upgrade -y
-```
+### Want the Technical Deep Dive?
 
-## Performance Optimizations
+The networking setup is complex, but I've documented every step for you:
 
-### 1. SSD Caching
+**📋
+[Complete Networking Configuration Guide](https://github.com/shubhpsd/homelab-configs/tree/main/networking)**
 
-```bash
-# Setup bcache for HDD acceleration with SSD
-sudo make-bcache -B /dev/sdb -C /dev/nvme0n1p1
-```
+This comprehensive guide covers:
 
-### 2. Network Optimization
+- Complete Docker Compose setup with environment configuration
+- Step-by-step Cloudflare tunnel creation and configuration
+- Nginx Proxy Manager host setup with SSL automation
+- Pi-hole installation with Unbound recursive DNS
+- Tailscale/Wireguard mesh network configuration
 
-```bash
-# Optimize network settings for media streaming
-echo 'net.core.rmem_max = 16777216' | sudo tee -a /etc/sysctl.conf
-echo 'net.core.wmem_max = 16777216' | sudo tee -a /etc/sysctl.conf
-sudo sysctl -p
-```
+## The Remaining Fun Apps
 
-## Results and Benefits
+Now comes the fun part the LEGAL services that make this thing worthwhile!
+Here's what I'm running:
 
-**Hardware Efficiency**: Repurposed laptop serves as a fully functional server
-**Storage Capacity**: 2TB usable space with RAID 1 redundancy (1TB effective
-capacity) **Service Uptime**: 99.8% availability over 6 months **Global
-Access**: Seamless connectivity from 15+ countries via Tailscale **Cost
-Savings**: $200+/year saved on cloud subscriptions, plus ~$1000 saved by
-repurposing existing hardware **Performance**: Local network speeds up to 1Gbps
-**Power Consumption**: Lower than a traditional server (45-65W under load)
+### Samba File Share
 
-## Lessons Learned
+Network-attached storage accessible from Windows, macOS, and Linux devices.
+Perfect for transferring files, sharing media across the network, and providing
+centralized storage access to all family devices.  
+**Homepage Dashboard**: My mission control center. One beautiful interface to
+monitor and access all 20+ services. Real-time stats, quick links, and a
+professional look that impresses visitors.
+
+### Cloud & Storage Services
+
+**Nextcloud**: My personal Google Drive replacement. File sync across all
+devices, calendar, contacts, notes, and even office suite integration. Zero
+monthly fees, unlimited storage.  
+**Immich**: Think Google Photos but completely private and free. AI-powered
+facial recognition, automatic mobile backup, and blazing-fast search through
+thousands of photos.
+
+### Media & Entertainment
+
+#### TV/Movies
+
+**Jellyfin & Jellyseerr**: My personal Netflix. Stream movies, TV shows, and
+home videos to any device. I've passed through the Intel GPU to the Jellyfin VM
+for hardware transcoding, ensuring smooth playback even on older devices while
+keeping CPU usage minimal.
+
+![Intel GPU Transcoding](gpu-transcode.png)
+
+#### Music
+
+**Navidrome**: Personal Spotify server. My entire music collection accessible
+from any device with a beautiful web interface and mobile app support through
+**Amperfy**. Unlike movies and TV shows, finding good quality music was
+surprisingly difficult.  
+I initially tried Lidarr for automation, but then discovered **SLSKD**, which is
+just a beautiful community driven solution for music discovery and acquisition.
+
+#### Media Automation
+
+**Sonarr**: Automated TV show management. Monitors release calendars, searches
+for episodes, downloads them automatically, and organizes your TV library with
+proper naming and metadata.  
+**Radarr**: Movie automation counterpart to Sonarr. Manages movie collections,
+monitors for releases, handles quality upgrades, and maintains a beautifully
+organized movie library.  
+**Prowlarr**: Indexer manager that feeds both Sonarr and Radarr. One central
+place to manage all your torrent trackers and Usenet indexers, with automatic
+syncing across the \*arr stack.  
+**Jackett**: Alternative indexer proxy that translates queries from apps like
+Sonarr and Radarr into tracker-specific searches. Works alongside Prowlarr to
+provide access to even more indexer sources.  
+**Bazarr**: Subtitle automation for your media. Automatically downloads
+subtitles for movies and TV shows in multiple languages, ensuring you never miss
+dialogue.
+
+The entire \*arr stack works together seamlessly - Prowlarr and Jackett finds
+sources, Sonarr/Radarr handle the automation, and Bazarr adds the finishing
+touch with subtitles. It's like having a personal media librarian that never
+sleeps!
+
+#### Watchtime and other stats
+
+**Media Organization and Statistics**: Automated downloading, organizing,
+quality management and statistics for all media content.
+
+### Speedtest
+
+Local home network speedtest tracker and historical tracking aswell
+
+Want to see the complete technical setup? All the Docker configurations,
+environment files, and step-by-step guides?  
+Find them here and help yourself:
+[GitHub repository](https://github.com/shubhpsd/homelab-configs)
+
+- Docker Compose templates
+- Environment configuration examples
+- Performance optimization tips
+- Troubleshooting guides - Troubleshooting guides
+
+## Real-World Impact
+
+### Daily Life Benefits
+
+This isn't just a tech project, it was a privacy and cost optimisation path.
+
+**Work Productivity**: Secure access to all my files from anywhere. No more "I
+left that file on my home PC" moments.  
+**Family Photos**: Automatic backup of everyone's phones. Never lose access to
+another precious memory, and easily share albums with family.  
+**Entertainment**: Our own Netflix with no monthly fees. Movies, TV shows, and
+music available instantly throughout the house on all TVs, Laptops, Phones
+whatever.  
+**Privacy**: Complete control over our data. No tech giants scanning our photos
+or reading our files.  
+**Learning**: Invaluable hands-on experience with enterprise technologies that
+helps my knowledge and career?
+
+### Cost Analysis
+
+**Initial Investment**: ₹9500 (~$100) for the Dell OptiPlex and ~₹30,000
+~(~$300) total for the future storage upgrades  
+**Monthly Savings**: ~₹1800 ~(~$20+) (replacing multiple cloud subscriptions)  
+**Break-even**: 20 months  
+**Ongoing Costs**: Less than ~₹250/month ~(~$5/month) in electricity
+
+Compare that to (Indian Pricing):
+
+- Netflix: ₹649/month
+- Google One: ₹130/month for 100GB
+- YT Premium/Music: ₹149/month
+- Additional cloud storage: ~₹900/month
+
+## Lessons Learned from the Journey
 
 ### Technical Insights
 
-- **Laptops make great servers**: Lower power consumption, built-in UPS
-  (battery), and compact form factor
-- **Cooling matters**: Added external cooling solution to manage heat in 24/7
-  operation
-- **RAID is essential**: Had one drive failure with zero data loss
-- **Docker simplifies management**: Easy updates and rollbacks
-- **Monitoring is crucial**: Caught issues before they became problems
-- **Automation saves time**: Backup and update scripts are invaluable
+**Start simple, scale gradually**: I began with just Jellyfin and Pi-hole.
+Adding services one by one helped me understand each component before building
+complexity.  
+**Documentation saves hours**: Keeping detailed setup notes in my GitHub
+repository has been invaluable for troubleshooting and helping friends set up
+their own systems.  
+**The community is incredible**: r/selfhosted, r/homelab, YouTube, and Discord
+servers provided answers to every question I had. The self-hosting community
+genuinely wants you to join them.
 
-### Infrastructure Design
+### Personal Growth
 
-- **Start simple**: Begin with core services, expand gradually
-- **Document everything**: Configuration notes saved countless hours
-- **Security first**: VPN access is much safer than port forwarding
-- **Regular maintenance**: Scheduled updates prevent security issues
+**From commerce student to sysadmin**: This project taught me more about
+networking, Linux, and system administration than any course could. The hands-on
+learning is irreplaceable.  
+**Patience with troubleshooting**: Not everything works on the first try.
+Learning to read logs, search for solutions, and methodically debug issues has
+been incredibly valuable.  
+**Privacy awareness**: Running my own services made me realize how much personal
+data I was giving to big tech companies. Now my family's photos, files, and
+browsing data stay under our control.  
+**Cost consciousness**: Tracking the real costs versus cloud subscriptions
+showed me that self-hosting isn't just about privacy - it's genuinely more
+economical for heavy users.
 
-## Future Expansions
+### Future Expansion Plans
 
-**Planned Additions**:
+- **Storage growth**: Planning a for some HDDs to expand and help with data
+  parity
+- **Home automation**: Adding Home Assistant for smart home integration and also
+  get some smart home appliances
+- **Enhanced monitoring**: More detailed metrics and alerting
+- **Backup improvements**: Off-site backup strategy for disaster recovery, edge
+  case handling am i right?
 
-- **Home automation**: Home Assistant integration
-- **Git hosting**: Self-hosted GitLab or Gitea
-- **Email server**: Complete email independence
-- **NAS expansion**: Additional storage as needs grow
+## Conclusion
 
-**Infrastructure Improvements**:
+**The real magic isn't in the technology itself** - it's in the independence it
+provides. No more worrying about cloud storage limits, streaming service price
+hikes, content removal or privacy violations. My digital life is truly under
+control.
 
-- **Load balancing**: High availability for critical services
-- **Backup strategies**: Off-site backup rotation
-- **Power management**: UPS integration for clean shutdowns
+If you're considering starting your own homelab journey, my advice is simple:
+**start small and start today**. Pick one service that solves a real problem for
+you, pick up an old laptop, and build from there. The skills you'll develop and
+the satisfaction you'll gain are worth far more than the money you'll save.
 
-## Impact on Daily Life
-
-This self-hosted infrastructure has transformed how I handle digital content:
-
-- **Media streaming**: 4K movies anywhere in the world
-- **Photo management**: Automatic backup and AI organization
-- **File access**: All documents available on any device
-- **Privacy**: Complete control over personal data
-
-## Technical Skills Developed
-
-**System Administration**: Linux server management, networking, storage
-**Containerization**: Docker expertise, service orchestration **Security**: VPN
-setup, SSL certificates, firewall management **Monitoring**: Prometheus/Grafana,
-log analysis **Automation**: Bash scripting, cron jobs, backup strategies
-
-## Cost Analysis
-
-**Initial Investment**: ~$200 (mostly for external drives, as laptop was
-repurposed) **Hardware Savings**: ~$600 (cost avoided by not purchasing a
-dedicated server) **Monthly Costs**: ~$10 (electricity - laptop is more power
-efficient than a traditional server) **Annual Savings**: ~$200 (vs cloud
-subscriptions) **ROI Timeline**: ~1 year (much faster due to repurposing
-existing hardware)
-
-This project demonstrates that self-hosting is not just feasible but highly
-beneficial for anyone seeking data ownership, privacy, and learning
-opportunities in infrastructure management.
+Everything is documented in my
+[GitHub repository](https://github.com/shubhpsd/homelab-configs) - Docker
+configs, troubleshooting guides, and step-by-step setup instructions.
 
 ---
 
-**Key Technologies**: Docker, Ubuntu Server, Tailscale, Jellyfin, Nextcloud,
-Immich, RAID, Nginx
+_Have questions about any part of this setup? Found this helpful and want to
+share your own homelab story? Reach out through the contact page or connect with
+me on social media. I'd love to hear about your self-hosting adventures!_
