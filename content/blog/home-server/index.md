@@ -144,7 +144,7 @@ efficiency. Each class of services gets its LXC with dedicated CPU, memory, and
 storage allocations.
 
 Here's my config files for the same to help you:  
-**📋 [Complete Proxmox Setup Guide](https://github.com/shubhpsd/homelab-configs/tree/main/proxmox)**
+**📋 [Complete Proxmox Setup Guide](https://github.com/shubhpsd/homelab/tree/main/proxmox)**
 
 ## Ecosystem Overview
 
@@ -170,7 +170,7 @@ Each service includes custom widgets showing real-time stats like storage usage,
 active users, download progress, and system health.
 
 Please refer to my config to get an idea and setup your own version:  
-**📋 [Complete Homepage Configuration](https://github.com/shubhpsd/homelab-configs/tree/main/homepage)**
+**📋 [Complete Homepage Configuration](https://github.com/shubhpsd/homelab/tree/main/homepage)**
 
 ## Monitoring: Keeping Everything Running
 
@@ -192,7 +192,7 @@ complexity of Prometheus/Grafana. It tracks:
 - **Alert System**: Notifications when services exceed thresholds
 
 Both tools are documented in my monitoring configuration:  
-**📋 [Complete Monitoring Setup](https://github.com/shubhpsd/homelab-configs/tree/main/monitoring)**
+**📋 [Complete Monitoring Setup](https://github.com/shubhpsd/homelab/tree/main/monitoring)**
 
 ## Networking: Getting over CGNAT
 
@@ -288,7 +288,7 @@ allows my network to assume I'm sitting right at my home desk.
 The networking setup is complex, but I've documented every step for you:
 
 **📋
-[Complete Networking Configuration Guide](https://github.com/shubhpsd/homelab-configs/tree/main/networking)**
+[Complete Networking Configuration Guide](https://github.com/shubhpsd/homelab/tree/main/networking)**
 
 This comprehensive guide covers:
 
@@ -364,6 +364,9 @@ sources, Sonarr/Radarr handle the automation, and Bazarr adds the finishing
 touch with subtitles. It's like having a personal media librarian that never
 sleeps!
 
+**📋
+[Complete Media Stack Configuration](https://github.com/shubhpsd/homelab/tree/main/media)**
+
 #### Watchtime and other stats
 
 **Media Organization and Statistics**: Automated downloading, organizing,
@@ -376,7 +379,7 @@ Local home network speedtest tracker and historical tracking aswell
 Want to see the complete technical setup? All the Docker configurations,
 environment files, and step-by-step guides?  
 Find them here and help yourself:
-[GitHub repository](https://github.com/shubhpsd/homelab-configs)
+[GitHub repository](https://github.com/shubhpsd/homelab)
 
 - Docker Compose templates
 - Environment configuration examples
@@ -468,8 +471,8 @@ you, pick up an old laptop, and build from there. The skills you'll develop and
 the satisfaction you'll gain are worth far more than the money you'll save.
 
 Everything is documented in my
-[GitHub repository](https://github.com/shubhpsd/homelab-configs) - Docker
-configs, troubleshooting guides, and step-by-step setup instructions.
+[GitHub repository](https://github.com/shubhpsd/homelab) - Docker configs,
+troubleshooting guides, and step-by-step setup instructions.
 
 ---
 
