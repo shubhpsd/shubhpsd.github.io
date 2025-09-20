@@ -4,8 +4,8 @@ date: 2025-09-19
 draft: false
 description:
   "How I built a complete home server setup with Proxmox VE on a Dell OptiPlex
-  3060, running 20+ services including Nextcloud, Jellyfin, and more. A journey
-  from commerce background to self-hosting enthusiast."
+  3060, running 20+ services including Nextcloud, Immich, Jellyfin etc., this is
+  also a guide to help you get started with your homelab journey."
 tags:
   [
     "homelab",
