@@ -5,6 +5,7 @@ description:
 projects:
   - "data-viz"
   - "githubfetch"
+  - "home-server"
   - "yoga-pose-detector"
   - "movie-recommendation-system"
   

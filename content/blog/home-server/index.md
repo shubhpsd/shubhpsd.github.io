@@ -21,7 +21,7 @@ tags:
 categories: ["Technical", "Projects"]
 toc: true
 cover:
-  src: ./server.jpg
+  src: server.jpg
   alt:
     "Dell OptiPlex 3060 Micro running Proxmox VE with 20+ self-hosted services"
 ---
