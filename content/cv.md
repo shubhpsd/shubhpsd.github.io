@@ -21,7 +21,7 @@ description: "Curriculum Vitae - Shubham Prasad"
 
 {{< json-resume "skills" >}}
 
-## Awards & Certifications
+## Certifications
 
 {{< json-resume "awards" >}}
 

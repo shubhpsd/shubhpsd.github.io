@@ -5,4 +5,4 @@ draft: false
 description: "Shubham Prasad's Blog - Finance, Machine Learning, and Technology"
 ---
 
-Welcome to my blog. Check out the latest projects/ideas I have below 👇🏼
+Welcome to my blog. I mostly share projects or thoughts here, read them below 👇🏼

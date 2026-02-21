@@ -2,6 +2,30 @@
   font-family: var(--font-monospace);
 }
 
+.jr-projects__name {
+  font-size: 1.125rem;
+  font-weight: bold;
+}
+
+.jr-skills__item p,
+.jr-awards__summary {
+  margin-top: 0.1rem;
+  margin-bottom: 0.1rem;
+}
+
+.jr-skills__list ul,
+.jr-languages__list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.jr-skills__item,
+.jr-awards__item,
+.jr-languages__item {
+  margin-bottom: 0.4rem;
+}
+
 .jr__item-meta {
   align-items: start;
   flex-flow: column;
@@ -13,16 +37,64 @@
     flex-flow: row wrap;
   }
 
+  .jr-work__row1,
+  .jr-work__row2,
+  .jr-projects__row1 {
+    display: flex;
+    flex-basis: 100%;
+    align-items: center;
+  }
+
+  .jr-work__row1 .jr-work__position,
+  .jr-projects__row1 .jr-projects__name {
+    flex-grow: 1;
+  }
+
+  .jr-work__row2 .jr-work__name,
+  .jr-projects__row1 .jr-projects__name {
+    flex-grow: 1;
+  }
+
+  .jr-work__row2 .jr-work__location,
+  .jr-projects__row1 .jr-projects__entity {
+    text-align: right;
+  }
+
   .jr__date,
-  .jr__date-range,
-  .jr-work__location {
+  .jr__date-range {
     flex-grow: 1;
     text-align: right;
   }
 
+  .jr-education__row1,
+  .jr-education__row2 {
+    display: flex;
+    flex-basis: 100%;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .jr-education__row1 .jr-education__area {
+    flex-grow: 1;
+  }
+
+  .jr-education__row1 .jr__date-range {
+    text-align: right;
+    flex-grow: 0;
+  }
+
+  .jr-education__row2 .jr-education__institution {
+    flex-grow: 1;
+    text-align: right;
+  }
+
+  .jr-education__row2 .jr__date-range {
+    text-align: right;
+    flex-grow: 0;
+  }
+
   .jr-awards__awarder,
   .jr-publications__publisher,
-  .jr-education__institution,
   .jr-volunteer__organization {
     flex-basis: 100%;
   }

@@ -275,13 +275,13 @@ allows my network to assume I'm sitting right at my home desk.
 
 **Service Access Points:**
 
-- `dash.shubhamprasad.me` → Homepage Dashboard
-- `nextcloud.shubhamprasad.me` → Cloud Storage
-- `photos.shubhamprasad.me` → Photo Management
-- `jellyfin.shubhamprasad.me` → Media Streaming
-- `jellyseerr.shubhamprasad.me` → Requesting downloads of shows/movies
-- `music.shubhamprasad.me` → Music Server
-- `speedtest.shubhamprasad.me` → Home network speedtest
+- `dash.yourdomain.com` → Homepage Dashboard
+- `nextcloud.yourdomain.com` → Cloud Storage
+- `photos.yourdomain.com` → Photo Management
+- `jellyfin.yourdomain.com` → Media Streaming
+- `jellyseerr.yourdomain.com` → Requesting downloads of shows/movies
+- `music.yourdomain.com` → Music Server
+- `speedtest.yourdomain.com` → Home network speedtest
 
 ### Want the Technical Deep Dive?
 

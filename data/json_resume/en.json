@@ -2,16 +2,18 @@
   "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
   "basics": {
     "name": "Shubham Prasad",
-    "label": "Finance and Tech Enthusiast",
+    "label": "Development Economics Aspirant with Gym, Tech, Reading and Music Hobbies",
     "image": "/shubham-prasad.webp",
-    "email": "shubhampsd@tuta.io",
+    "email": "",
     "phone": "",
-    "summary": "Data Engineer and Machine Learning enthusiast pursuing Post Graduate Diploma in Statistical Methods and Analytics at Indian Statistical Institute. Currently interning at GXCO and NITI Aayog, developing data pipelines, ERP solutions, and validating government datasets. Experienced in building production-ready applications using Python, SQL, LLM technologies, and modern frameworks. Passionate about applying data science to solve real-world problems in finance, NGO operations, and government policy.",
-    "location": {
-      "city": "Delhi",
-      "country": "India"
-    },
+    "summary": "Economics Aspirant with a Post Graduate Diploma in Statistical Methods and Analytics from Indian Statistical Institute. Interned at Paytm, GXCO and NITI Aayog, developing data pipelines, ERP solutions, and validating government datasets. Passionate about solving real-world problems in finance, NGO operations, and government policy to uplift human lives.",
+    "location": {},
     "profiles": [
+      {
+        "network": "Gmail",
+        "username": "shubhamprasad285@gmail.com",
+        "url": "mailto:shubhamprasad285@gmail.com"
+      },
       {
         "network": "GitHub",
         "username": "shubhpsd",
@@ -21,20 +23,24 @@
         "network": "LinkedIn",
         "username": "shubhampsd",
         "url": "https://linkedin.com/in/shubhampsd/"
-      },
-      {
-        "network": "X",
-        "username": "psdshubham",
-        "url": "https://x.com/psdshubham"
-      },
-      {
-        "network": "Gmail",
-        "username": "shubhamprasad285@gmail.com",
-        "url": "mailto:shubhamprasad285@gmail.com"
       }
     ]
   },
   "work": [
+    {
+      "name": "Paytm",
+      "location": "Noida, Uttar Pradesh, India",
+      "description": "Fintech & Payments",
+      "position": "Analyst Intern",
+      "url": "https://paytm.com/",
+      "startDate": "2025-10",
+      "endDate": "2026-02",
+      "summary": "Contributed to a fraud detection portal for Gulf telecom providers and assisted the ML team with dataset analysis and scoring.",
+      "highlights": [
+        "Assisted the machine learning team in analysing telecom provider datasets and building a confidence-based ranking system to evaluate and compare different companies, plans, and value metrics.",
+        "Contributed to an internal fraud detection portal being developed in collaboration with Gulf telecom providers, supporting data review and pipeline work."
+      ]
+    },
     {
       "name": "GXCO",
       "location": "Remote",
@@ -42,12 +48,13 @@
       "position": "Data Engineer Intern",
       "url": "https://gxco.org/",
       "startDate": "2025-07",
-      "summary": "Developing data pipelines, ERP solutions and CRM systems for 5+ NGO clients using Google BigQuery, Frappe framework and Vue.js.",
+      "endDate": "2025-11",
+      "summary": "Built ERP portals, data pipelines, and lead-tracking dashboards for multiple NGO clients using Frappe, Google BigQuery, and custom integrations.",
       "highlights": [
-        "Designed and implemented data pipelines using Google BigQuery to automate data flow from Google Forms submissions to CRM leads page, streamlining data collection for NGO clients including Inrem, Udhyam, Waste Warriors, and Animedh.",
-        "Developed ERP solutions using Frappe framework in Docker dev containers for ERPNext platform, customizing features for 100+ schools across NGO networks including specific leave types and leave allocation automations using Python scripting.",
-        "Built comprehensive CRM system using Vue.js to track 500+ leads, convert to deals, manage donor entries, and automate lead status workflows (new, contacted, completed, discarded) across multiple NGO clients.",
-        "Led team delegation and client meetings for 5+ NGO partners, utilizing B.Com background to discuss cost optimization and resource planning, delegating tasks to 3+ developers and reporting to senior management."
+        "Built Frappe-based ERP portals for NGO clients, customising modules to fit their specific operational workflows around schools, events, and internal processes.",
+        "Integrated WhatsApp-based order and event data for an NGO client via API into Google BigQuery, and built a clean dashboard to track conversions and interactions.",
+        "Worked with an NGO's fundraising team to build a lead tracking dashboard — coordinated with their leads platform, and set up filters to manage lead status (new, contacted, converted, etc.).",
+        "Assisted with an accounting classification task, helping organise and categorise data across states, districts, and schools for a client's reporting needs."
       ]
     },
     {
@@ -58,12 +65,10 @@
       "url": "https://niti.gov.in/",
       "startDate": "2025-07",
       "endDate": "2025-09",
-      "summary": "Data validation and UI/UX improvement for NDAP portal (6,088 datasets from 31 sectors, 53 ministries) and Women Entrepreneurship Platform.",
+      "summary": "Validated and organised datasets for the NDAP portal and facilitated sessions for the Women Entrepreneurship Platform.",
       "highlights": [
-        "Validated 1,000+ datasets from NDAP portal (containing 6,088 total datasets from 31 sectors and 53 ministries) against original government sources, ensuring 95%+ data accuracy for NDAP 2.0 rollout.",
-        "Processed and verified datasets from World Bank repository relevant to India, integrating international development data with national government sources for comprehensive policy analysis.",
-        "Supported Women Entrepreneurship Platform (WEP) by assisting with data onboarding of 200+ women entrepreneurs and resolving technical queries to ensure data integrity.",
-        "Developed Figma layouts recommending UI/UX improvements for NDAP portal including persistent user sign-in and LLM integration features, contributing to better accessibility for 10,000+ portal users."
+        "Validated and organised datasets from the NDAP portal (covering 31 sectors and 53 ministries), cross-referencing against original government sources to ensure accuracy.",
+        "Facilitated Women Entrepreneurship Platform (WEP) sessions — moderated meetings, managed the discussion flow between entrepreneurs and mentors, and ensured sessions ran smoothly."
       ]
     },
     {
@@ -74,10 +79,11 @@
       "url": "https://gluedsupercharged.com/",
       "startDate": "2023-12",
       "endDate": "2024-02",
-      "summary": "Helped optimize online brand prescence through SEO and AD tools.",
+      "summary": "Handled digital marketing, social media outreach, content creation, and vendor coordination for an arcade and events brand.",
       "highlights": [
-        "Increased organic website traffic by 18% by analyzing Google Analytics data to identify and recommend optimizations for 200+ underperforming keywords.",
-        "Reduced manual reporting efforts by 5 hours per week by building and automating performance dashboards using Python and Tableau to track 7+ core KPIs."
+        "Managed SEO efforts and Instagram outreach to grow the brand's online presence and drive footfall.",
+        "Designed promotional banners and reels for social media campaigns and event announcements.",
+        "Contacted and coordinated with vendors, and participated in deal discussions and negotiations for events."
       ]
     }
   ],
@@ -87,14 +93,14 @@
       "url": "https://www.isine.ac.in/",
       "area": "Statistical Methods and Analytics",
       "studyType": "PGD",
-      "startDate": "2024-08-01",
-      "endDate": "2025-06-01",
+      "startDate": "2024-08",
+      "endDate": "2025-05",
       "score": "",
       "courses": [
-        "Statistical Computing",
+        "Statistics",
         "Machine Learning",
-        "Financial Analytics",
-        "Data Science"
+        "Financial Statistics",
+        "Probability and Math"
       ]
     },
     {
@@ -102,8 +108,8 @@
       "url": "https://maims.ac.in/",
       "area": "Commerce (Honours)",
       "studyType": "Bachelor",
-      "startDate": "2021-08-01",
-      "endDate": "2024-06-01",
+      "startDate": "2021-08",
+      "endDate": "2024-06",
       "score": "",
       "courses": [
         "Financial Management",
@@ -116,21 +122,21 @@
   "skills": [
     {
       "name": "Programming Languages",
-      "level": "Advanced",
+      "level": "",
       "keywords": [
         "Python",
         "R",
         "SQL",
-        "JavaScript",
-        "C++",
+        "Bash",
+        "HTML/CSS",
         "Go",
-        "Bash Scripting",
-        "HTML/CSS"
+        "Rust",
+        "Swift"
       ]
     },
     {
       "name": "Machine Learning & Data Science",
-      "level": "Advanced",
+      "level": "",
       "keywords": [
         "PyTorch",
         "Scikit-learn",
@@ -144,35 +150,9 @@
       ]
     },
     {
-      "name": "Cloud & Data Engineering",
-      "level": "Intermediate",
-      "keywords": [
-        "Google BigQuery",
-        "Docker",
-        "Microservices",
-        "Data Pipelines",
-        "ETL",
-        "SQLite",
-        "PostgreSQL",
-        "Git"
-      ]
-    },
-    {
-      "name": "Frameworks & Tools",
-      "level": "Intermediate",
-      "keywords": [
-        "Vue.js",
-        "Next.js",
-        "Frappe Framework",
-        "ERPNext",
-        "Streamlit",
-        "MediaPipe",
-        "Linux",
-        "Tableau",
-        "Power BI",
-        "Excel",
-        "Figma"
-      ]
+      "name": "Tools & Infrastructure",
+      "level": "",
+      "keywords": ["Docker", "YAML", "Git", "Google BigQuery", "Linux"]
     }
   ],
   "languages": [
@@ -191,13 +171,50 @@
   ],
   "projects": [
     {
-      "name": "DataViz Pro: AI-Powered Business Intelligence Platform",
-      "description": "Production-ready microservices platform enabling non-technical users to query datasets and generate visualizations using LLM technology",
+      "name": "githubfetch",
+      "description": "Python CLI tool to view GitHub profiles in the terminal, published on PyPI",
       "highlights": [
-        "Architected production-ready microservices platform with 4 independent services (Next.js TypeScript frontend, Python LangGraph backend, Node.js SQLite server, Flask API) handling 1MB+ file uploads across 14+ database tables.",
-        "Developed intelligent SQL generation system using GPT-4/Gemini APIs and LangGraph multi-agent framework, achieving 95%+ query accuracy through context-aware parsing and schema validation.",
-        "Built real-time data visualization engine with 5 interactive chart types and streaming WebSocket responses, reducing time-to-insight by 80% for business users.",
-        "Implemented comprehensive deployment pipeline with Docker containerization, automated testing, and code quality enforcement across the entire microservices architecture."
+        "Install with `pip install githubfetch`, then run `githubfetch <username>` to view a stylised GitHub profile in your terminal.",
+        "Pulls data from GitHub's GraphQL and REST APIs to display user info, pinned repos, and a contribution heatmap.",
+        "Inspired by neofetch — built for developers who live in the terminal."
+      ],
+      "keywords": ["Python", "GraphQL", "REST API", "CLI", "PyPI"],
+      "startDate": "2025-03-01",
+      "endDate": "2025-04-01",
+      "url": "https://github.com/shubhpsd/githubfetch",
+      "entity": "Open Source",
+      "type": "tool"
+    },
+    {
+      "name": "Home Server",
+      "description": "Self-hosted homelab running on an Optiplex 3060 with media, storage, and network services",
+      "highlights": [
+        "Running Jellyfin, *arr stack (Sonarr, Radarr, etc.), Nextcloud, and Immich for media management and personal cloud storage.",
+        "Set up Pi-hole for network-wide ad blocking, with Cloudflare and Nginx as reverse proxy for external access.",
+        "Manages DNS, SSL, and routing for all services — accessible remotely with proper auth and tunnelling."
+      ],
+      "keywords": [
+        "Linux",
+        "Docker",
+        "Nginx",
+        "Cloudflare",
+        "Pi-hole",
+        "Jellyfin",
+        "Nextcloud",
+        "Self-hosting"
+      ],
+      "startDate": "2024-01-01",
+      "url": "https://github.com/shubhpsd/homelab",
+      "entity": "Personal Project",
+      "type": "application"
+    },
+    {
+      "name": "DataViz — Data Visualisation Tool",
+      "description": "Chat with your dataset and get charts back, built on a microservices architecture",
+      "highlights": [
+        "Upload a CSV/database, ask questions in plain English — GPT-4/Gemini generates SQL, runs it, and returns interactive charts.",
+        "4 services: Next.js frontend, LangGraph Python backend, Node.js SQLite server, Flask API — all containerised with Docker.",
+        "Supports 5 chart types with streaming WebSocket responses."
       ],
       "keywords": [
         "Python",
@@ -206,118 +223,93 @@
         "LLM",
         "Next.js",
         "SQLite",
-        "Docker",
-        "Microservices",
-        "WebSocket"
+        "Docker"
       ],
       "startDate": "2025-06-01",
       "endDate": "2025-07-01",
       "url": "https://github.com/shubhpsd/data-viz",
-      "roles": ["AI-Powered Data Platform"],
       "entity": "Personal Project",
       "type": "application"
     },
     {
-      "name": "Yoga Pose Classification System",
-      "description": "End-to-end computer vision pipeline that classifies 107 distinct yoga poses from live video stream",
+      "name": "Yoga Pose Classifier",
+      "description": "Classifies 107 yoga poses from a live webcam feed",
       "highlights": [
-        "Built and deployed an end-to-end computer vision pipeline that classifies 107 distinct yoga poses from a live video stream, achieving approximately 75% accuracy on a 5.6k image test dataset",
-        "Leveraged the MediaPipe framework for real-time human pose estimation, extracting key body landmarks as input for the classification model"
+        "Uses MediaPipe to extract body landmarks in real time, fed into a PyTorch model trained on 5.6k images.",
+        "~75% accuracy across 107 poses, deployed as a Streamlit web app."
       ],
       "keywords": [
-        "ML",
-        "Computer Vision",
         "Python",
-        "Streamlit",
+        "PyTorch",
         "MediaPipe",
-        "PyTorch"
+        "Computer Vision",
+        "Streamlit"
       ],
       "startDate": "2025-04-01",
       "endDate": "2025-05-01",
       "url": "https://detectpose.streamlit.app/",
-      "roles": ["Yoga Pose Classifier & Feedback System"],
       "entity": "Personal Project",
       "type": "application"
     },
     {
-      "name": "Hybrid Movie Recommendation Engine",
-      "description": "Dual-model recommendation system combining content-based filtering and popularity-based algorithms",
+      "name": "Movie Recommendation Engine",
+      "description": "Hybrid recommender combining content-based filtering and popularity-based ranking",
       "highlights": [
-        "Architected a hybrid recommendation engine combining content-based filtering and popularity-based model to deliver robust suggestions for 45,000+ movies, effectively mitigating the cold-start problem for new users.",
-        "Utilized Scikit-learn to build a TF-IDF vectorizer, transforming movie metadata into a 5,000-dimensional feature space for calculating content similarity with 85%+ recommendation accuracy.",
-        "Implemented collaborative filtering algorithms processing user-movie interaction matrices to generate personalized recommendations for diverse user preferences."
+        "Covers 45,000+ movies using TF-IDF on metadata and collaborative filtering on user-movie interaction data.",
+        "Handles cold-start by falling back to popularity-based suggestions for new users."
       ],
       "keywords": [
-        "Recommender Systems",
-        "NLP",
         "Python",
         "Scikit-learn",
-        "TF-IDF"
+        "TF-IDF",
+        "NLP",
+        "Recommender Systems"
       ],
       "startDate": "2025-05-01",
       "endDate": "2025-06-01",
       "url": "https://github.com/shubhpsd/movie-recosystem",
-      "roles": ["Dual-Model Movie Recommendation System"],
       "entity": "Personal Project",
       "type": "application"
     },
     {
-      "name": "GitHubFetch CLI Tool",
-      "description": "Open-source Python CLI tool for viewing stylized GitHub profiles in terminal, published on PyPI",
+      "name": "Expense Tracker",
+      "description": "Personal finance dashboard built with Streamlit and SQLite",
       "highlights": [
-        "Developed and published `githubfetch` on PyPI with 500+ downloads, a Python CLI tool for viewing stylized GitHub profiles directly in the terminal, inspired by system fetch tools like neofetch.",
-        "Engineered the tool to query GitHub GraphQL and REST APIs, parsing JSON data to display user info, pinned repositories, and horizontal contribution heatmap with 99.9% API reliability.",
-        "Implemented robust error handling and caching mechanisms to ensure seamless user experience across different network conditions and API rate limits."
+        "Track income and expenses across custom categories with full CRUD support.",
+        "Visualises spending patterns over time using Matplotlib and Seaborn."
       ],
-      "keywords": ["Python", "GraphQL", "Rest API", "CLI", "PyPI"],
-      "startDate": "2025-03-01",
-      "endDate": "2025-04-01",
-      "url": "https://github.com/shubhpsd/githubfetch",
-      "roles": ["GitHubFetch CLI Tool"],
-      "entity": "Open Source",
-      "type": "tool"
-    },
-    {
-      "name": "Personal Financial Analytics Dashboard",
-      "description": "Full-stack financial management application with interactive dashboard and advanced analytics",
-      "highlights": [
-        "Engineered an interactive dashboard in Streamlit with SQLite backend supporting 50+ concurrent users, allowing full CRUD management of financial transactions with 99.9% uptime.",
-        "Developed dynamic data visualizations using Matplotlib and Seaborn to track spending patterns across 8+ custom categories, providing actionable insights that helped users reduce expenses by 20%.",
-        "Implemented secure multi-user authentication and data isolation, ensuring privacy and data integrity for personal financial information."
-      ],
-      "keywords": ["Python", "Streamlit", "Pandas", "Matplotlib", "SQLite"],
+      "keywords": ["Python", "Streamlit", "SQLite", "Pandas", "Matplotlib"],
       "startDate": "2025-01-01",
       "endDate": "2025-02-01",
       "url": "https://track-expense.streamlit.app/",
-      "roles": ["Personal Financial Analytics Dashboard"],
       "entity": "Personal Project",
       "type": "application"
     }
   ],
   "awards": [
     {
-      "title": "Machine Learning by Stanford University",
+      "title": "Machine Learning — Stanford University",
       "date": "2025-05-01",
       "awarder": "Coursera",
-      "summary": "Completed comprehensive machine learning course covering supervised and unsupervised learning algorithms."
+      "summary": "Andrew Ng's ML course. Covers linear/logistic regression, neural networks, SVMs, clustering, and anomaly detection."
     },
     {
       "title": "Python and Statistics for Financial Analysis",
       "date": "2025-04-01",
       "awarder": "Coursera",
-      "summary": "Applied Python programming and statistical methods for financial data analysis and modeling."
+      "summary": "Statistical methods and Python applied to financial data — returns, risk, portfolio analysis."
     },
     {
       "title": "JPMorgan Chase Investment Banking Job Simulation",
       "date": "2024-01-01",
       "awarder": "Forage",
-      "summary": "Completed virtual work experience program in investment banking and financial analysis."
+      "summary": "Virtual experience covering deal structuring, financial modelling, and pitching — gave a feel for how IB teams actually work."
     },
     {
-      "title": "Data Analysis Using Excel And Python",
+      "title": "Data Analysis Using Excel and Python",
       "date": "2022-08-01",
       "awarder": "MAIMS",
-      "summary": "Comprehensive training in data analysis techniques using Excel and Python programming."
+      "summary": "Early intro to data analysis — pivot tables, basic stats, and Python scripting for cleaning and visualising data."
     }
   ],
   "meta": {

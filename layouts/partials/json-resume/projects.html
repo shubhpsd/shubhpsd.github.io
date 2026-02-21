@@ -1,0 +1,40 @@
+{{ $cv := index $.Site.Data.json_resume $.Site.Language.Lang }}
+{{ with $cv.projects }}
+  <div class="jr__list jr-projects__list">
+    {{ range . }}
+      <div class="jr__item jr-projects__item">
+        <div class="jr__item-meta">
+          <div class="jr-projects__row1">
+            <div class="jr-projects__name">
+              {{ if .url }}
+                <a href="{{ .url }}">{{ .name }}</a>
+              {{ else }}
+                <span>{{ .name }}</span>
+              {{ end }}
+            </div>
+            {{ with .entity }}
+              <div class="jr-projects__entity">{{ . }}</div>
+            {{ end }}
+          </div>
+          {{ with .description }}
+            <div class="jr-projects__description">{{ . }}</div>
+          {{ end }}
+        </div>
+
+        <div class="jr__item-content">
+          {{ with .highlights }}
+            <ul>
+              {{ range . }}
+                <li>{{ . }}</li>
+              {{ end }}
+            </ul>
+          {{ end }}
+        </div>
+
+        {{ with .keywords }}
+          <p>{{ delimit . ", " }}</p>
+        {{ end }}
+      </div>
+    {{ end }}
+  </div>
+{{ end }}
