@@ -500,6 +500,12 @@
         height: min(338px, 47.8125vw);
       }
 
+      .carousel-controls,
+      .carousel-indicators {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
       .project-footer {
         padding: 1rem 1.5rem 0.5rem;
       }
@@ -664,6 +670,40 @@
       const carousel = document.querySelector(".projects-carousel-container");
       carousel.addEventListener("mouseenter", stopAutoScroll);
       carousel.addEventListener("mouseleave", startAutoScroll);
+
+      // Touch events for mobile swiping
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let touchEndX = 0;
+      let touchEndY = 0;
+      const minSwipeDistance = 50;
+
+      carousel.addEventListener("touchstart", (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+        touchStartY = e.changedTouches[0].screenY;
+        stopAutoScroll();
+      }, { passive: true });
+
+      carousel.addEventListener("touchend", (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        touchEndY = e.changedTouches[0].screenY;
+        handleSwipe();
+        setTimeout(startAutoScroll, 5000);
+      }, { passive: true });
+
+      function handleSwipe() {
+        const diffX = touchEndX - touchStartX;
+        const diffY = touchEndY - touchStartY;
+        
+        // Ensure it's mostly a horizontal swipe
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > minSwipeDistance) {
+          if (diffX > 0) {
+            prevSlide();
+          } else {
+            nextSlide();
+          }
+        }
+      }
 
       document.addEventListener("keydown", (e) => {
         if (e.key === "ArrowLeft") {
