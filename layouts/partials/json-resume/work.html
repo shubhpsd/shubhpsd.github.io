@@ -9,24 +9,24 @@
             {{ partial "json-resume/duration.html" (dict "context" . "site" $.Site) }}
           </div>
           {{ if or .name .location }}
-          <div class="jr-work__row2">
-            {{ if .name }}
-              <div class="jr-work__name">
-                {{ if .url }}
-                  <a href="{{ .url }}">{{ .name }}</a>
-                {{ else }}
-                  <span>{{ .name }}</span>
-                {{ end }}
-                {{ with .description }}
-                  <span>—</span>
-                  <span class="jr-work__description">{{ . }}</span>
-                {{ end }}
-              </div>
-            {{ end }}
-            {{ with .location }}
-              <div class="jr-work__location">{{ . }}</div>
-            {{ end }}
-          </div>
+            <div class="jr-work__row2">
+              {{ if .name }}
+                <div class="jr-work__name">
+                  {{ if .url }}
+                    <a href="{{ .url }}">{{ .name }}</a>
+                  {{ else }}
+                    <span>{{ .name }}</span>
+                  {{ end }}
+                  {{ with .description }}
+                    <span>—</span>
+                    <span class="jr-work__description">{{ . }}</span>
+                  {{ end }}
+                </div>
+              {{ end }}
+              {{ with .location }}
+                <div class="jr-work__location">{{ . }}</div>
+              {{ end }}
+            </div>
           {{ end }}
         </div>
 

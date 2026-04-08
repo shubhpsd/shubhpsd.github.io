@@ -4,7 +4,7 @@
     <ul>
       {{ range . }}
         <li class="jr__item jr-skills__item">
-          <p><strong>{{ .name }}{{ with .level }} ({{ . }}){{ end }}</strong></p>
+          <p><strong>{{ .name }}{{ with .level }}({{ . }}){{ end }}</strong></p>
           {{ with .keywords }}
             <p>{{ delimit . ", " }}</p>
           {{ end }}
